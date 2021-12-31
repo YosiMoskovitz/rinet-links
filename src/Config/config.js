@@ -1,3 +1,3 @@
 export const APIconfig = {
-  url: 'http://rinet-links.herokuapp.com',
+  url: 'https://rinet-links.herokuapp.com',
 };
