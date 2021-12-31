@@ -1,0 +1,11 @@
+.dropdownTextAlign{
+    text-align: right;
+}
+.navbar{
+    margin-left: 3rem;
+}
+.bg{
+    background-color:#e7e6e1be;
+    position: sticky !important;
+    top: 0;
+}

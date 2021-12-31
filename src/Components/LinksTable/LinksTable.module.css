@@ -1,0 +1,44 @@
+.header{
+    padding-bottom: 1rem !important;
+}
+.btn{
+    padding: 0.4rem 2.5rem !important;
+    margin: 0 0.6rem;
+}
+.editBtns{
+    margin-left: 2rem;
+    /* padding-right: 25% !important; */
+}
+.Addbtn{
+    background-color: #ce4aba !important;
+    border-color: #ce4aba !important;
+}
+.Addbtn:hover{
+    background-color: #cf1bb4 !important;
+    border-color: #cf1bb4 !important;
+}
+.activeRow{
+    background-color: rgb(253, 246, 232) !important;
+}
+.activeColum{
+    background-color: rgb(194, 194, 194) !important;
+}
+.ColumUp::after{
+    padding-right: 10px;
+    content: '🠕';
+}
+.ColumDown::after{
+    padding-right: 10px;
+    content: '🠗';
+}
+.modalTitle{
+    padding-left: 65%;
+}
+.deleteContainer{
+    margin: 2rem !important;
+}
+.deleteBtns{
+    margin-left: 5% !important;
+    padding: 1% 12% !important;
+}
+

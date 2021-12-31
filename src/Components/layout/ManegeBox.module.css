@@ -1,0 +1,8 @@
+.manegeBox{
+    margin: 3rem;
+    height: fit-content;
+    padding: 3rem;
+    width: 82vw;
+    border:1px solid rgb(2, 56, 43);
+    border-radius: 10px;
+}

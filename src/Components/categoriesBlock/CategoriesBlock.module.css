@@ -1,0 +1,14 @@
+.category{
+    margin: 40px;
+    height: auto;
+    width: 80vw;
+    border:1px solid rgb(2, 56, 43);
+    border-radius: 10px;
+}
+
+.title{
+    width: fit-content;
+    margin: -15px 3rem 0 5px;
+    padding: 0 0.4rem;
+    background:white;
+}
