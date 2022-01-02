@@ -14,7 +14,6 @@ const LinksContext = createContext({
 });
 
 export function LinksContextProvider(props) {
-    console.log('Links-Context rendered')
     const [categories, setCategories] = useState({});
     const [links, setLinks] = useState({});
     const [hasChanged, setHasChanged] = useState(false);

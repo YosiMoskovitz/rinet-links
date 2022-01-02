@@ -21,7 +21,7 @@ export function LoginForm({ onSubmit, loading, message, setMessage }) {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             <h3 className={styles.title}>כניסה למערכת</h3>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
