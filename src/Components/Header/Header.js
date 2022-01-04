@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginContext from '../../store/Login-context'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { LogOutReq } from '../../Pages/Login/LoginApi';
+import { LogOutReq } from '../../Api/LoginApi';
 import 'bootstrap/dist/css/bootstrap.css';
 //icon for user pic
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';

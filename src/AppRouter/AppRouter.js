@@ -10,17 +10,18 @@ import { LinksContextProvider } from '../store/Links-context'
 import { LoginContextProvider } from '../store/Login-context';
 import LoginContext from '../store/Login-context'
 import { AxiosInterceptors } from '../Components/Utils'
-import { Layout, ManegeBox } from '../Components/layout'
+import { Layout, ManegeBox, LoginContainer } from '../Components/layout'
 
 import { Login } from '../Pages/Login'
 import NotFound from '../Pages/NotFound'
 import { Home } from '../Pages/Home';
 import { Manage } from '../Pages/Manage';
 import { Account } from '../Pages/Account/';
+import { ResetPass } from '../Pages/ResetPass'
+import { NewPass } from '../Pages/NewPass'
 import { LinksTable } from '../Components/LinksTable/LinksTable';
 import { AddLink } from '../Pages/Manage/AddLink'
 import { Upload } from '../Components/Upload';
-
 
 const PrivateRoutes = () => {
   const loginCtx = useContext(LoginContext)
@@ -82,7 +83,12 @@ export function AppRouter() {
               </Route>
             </Route>
           </Route>
-          <Route path="login" element={<Login />} />
+          <Route element={<LoginContainer />}>
+            <Route path="login" element={<Login />} />
+            <Route exec path="reset-password" element={<ResetPass />} />
+            <Route path="reset-password/:userId/:token" element={<NewPass />} />
+            <Route path="signup" element={<Login />} />
+          </Route>
           <Route path="/*" element={<NotFound />} />
         </Route>
       </Routes>

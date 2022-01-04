@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { APIconfig } from '../../Config'
+import { APIconfig } from '../Config'
 
 export const AddLink = (newLink) => {
     var result = Axios.post(`${APIconfig.url}/links `, newLink)

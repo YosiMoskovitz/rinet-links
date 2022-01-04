@@ -28,20 +28,29 @@ const SetupInterceptors = () => {
     );
 
     const resHandler = (res) => {
-        var handler = {type: '', title: '', message: '', then: undefined }
+        var handler = { type: '', title: '', message: '', then: undefined }
         switch (res.status) {
             case 200:
                 handler = {
-                    code : 200,
-                    type : 'success',
+                    code: 200,
+                    type: 'success',
                     message: 'הצליח',
+                    then: null
+                };
+                break;
+            case 400:
+                handler = {
+                    type: 'error',
+                    code: 400,
+                    title: null,
+                    message: 'לינק לא תקין או שפג תוקפו',
                     then: null
                 };
                 break;
             case 401:
             case 403:
                 handler = {
-                    type : 'error',
+                    type: 'error',
                     code: 403,
                     title: 'כשל באימות',
                     message: <p>לא הצלחנו לאמת את החשבון.<br />מפנים אותך למסך כניסה מחדש...</p>,
@@ -52,7 +61,7 @@ const SetupInterceptors = () => {
                 break;
             case 409:
                 handler = {
-                    type : 'error',
+                    type: 'error',
                     code: 409,
                     title: 'כשל באימות',
                     message: 'פרטים שגויים',
@@ -61,7 +70,7 @@ const SetupInterceptors = () => {
                 break;
             case 500:
                 handler = {
-                    type : 'error',
+                    type: 'error',
                     cose: 500,
                     title: 'שגיאת שרת',
                     message: 'אירעה שגיאה בשרת. נסה שנית',
@@ -70,7 +79,7 @@ const SetupInterceptors = () => {
                 break;
             default:
                 handler = {
-                    type : 'error',
+                    type: 'error',
                     title: 'שגיאת לא ידועה',
                     message: 'אירעה שגיאה לא ידועה. אנא נסה שנית מאוחר יותר',
                     then: null

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LoginReq } from './LoginApi';
+import { LoginReq } from '../../Api/LoginApi';
 import LoginContext from '../../store/Login-context'
 
-import styles from './Login.module.css';
+// import styles from './Login.module.css';
 import { LoginForm } from '../../Components/LoginForm';
 
 export function Login() {
@@ -42,7 +42,7 @@ export function Login() {
     // }
 
         return (
-            <section className={styles.main}>
+            <section>
                 <LoginForm onSubmit={LoginSubmit} message={msg} setMessage={setMsg} loading={isLoading}/>
             </section>
         )
