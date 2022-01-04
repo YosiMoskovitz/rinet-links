@@ -1,9 +1,11 @@
 import { React, useContext, useState } from 'react'
 import LinksContext from '../../store/Links-context';
-import { Table, Pagination, Form, Col, Row, Button, Modal, ModalTitle } from 'react-bootstrap';
+import { Table, Pagination, Form, Col, Row, Button, Modal, ModalTitle, Alert } from 'react-bootstrap';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DangerousIcon from '@mui/icons-material/Dangerous';
 import { OutClicker } from '../Utils';
 import { AddLink, EditLink, DeleteLink } from '../Utils';
 import { FormikLinkForm } from '../LinkForm'
@@ -103,6 +105,8 @@ export function LinksTable() {
     const handelShow = () => setShow(true);
     const handelClose = () => {
         setShow(false);
+        deletedRes && handleRefreshGlobalCTX();
+        setDeletedRes(undefined)
     };
     const handleRefreshGlobalCTX = () => {
         LinksCtx.setChange(true);
@@ -117,9 +121,10 @@ export function LinksTable() {
                         <Button variant='secondary' size="lg" onClick={handelClose} className={styles.deleteBtns}>{'ביטול'}</Button>
                     </div>
                     :
-                    <div>
-                        <p className={`d-flex justify-content-center ${deletedRes.type === 'success' ? 'text-success' : 'text-danger'}`}>{deletedRes.message}</p>
-                    </div>}
+                    <Alert variant={deletedRes.type === 'success' ? 'success' : 'danger'}>
+                        {deletedRes.type === 'success' ? <CheckCircleIcon color='success' fontSize='large' />
+                            : <DangerousIcon color='danger' fontSize='large' />} {deletedRes.message}
+                    </Alert>}
             </div>
         )
     }
@@ -127,8 +132,8 @@ export function LinksTable() {
     const ModalContent = () => {
         return (
             <Modal show={show} onHide={handelClose}>
-                <Modal.Header closeButton>
-                    <ModalTitle className={styles.modalTitle}>{modalTitle}</ModalTitle>
+                <Modal.Header>
+                    {!deletedRes ? <ModalTitle>{modalTitle}</ModalTitle> : null}
                 </Modal.Header>
                 <Modal.Body>
                     {isDeleteFunc ? <DeleteModal /> : <FormikLinkForm linkID={modelInfo} formSubmit={formSubmit} />}
@@ -155,12 +160,12 @@ export function LinksTable() {
     const handelDeleteBtnClick = () => {
         setDeletedRes(false)
         setIsDeleteFunc(true);
-        handelShow();
         setModalTile('האם אתה בטוח?');
+        handelShow();
     }
     const handelDeleteConfirmed = async () => {
         DeleteLink(modelInfo).then((res) => {
-            setDeletedRes(res)
+            setDeletedRes(res.handler)
         })
     }
 
@@ -172,7 +177,7 @@ export function LinksTable() {
                 <div className={styles.header}>
                     <Row className="align-items-center">
                         <Col xs="auto" className="my-1">
-                            <Form.Label>שורות בדף</Form.Label>
+                            <Form.Label>כמות שורות בדף</Form.Label>
                         </Col>
                         <Col xs="auto" className="my-1">
                             <Form.Select className="me-sm-1" id="inlineFormCustomSelect" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>

@@ -5,7 +5,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LogOutReq } from '../../Api/LoginApi';
 import 'bootstrap/dist/css/bootstrap.css';
 //icon for user pic
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import styles from './Header.module.css'
 
 export function Header () {
@@ -35,12 +35,13 @@ export function Header () {
                     <Nav className={`me-auto ${styles.navbar}`}>
                         <NavDropdown
                             id="nav-dropdown-dark-example"
-                            title={user.firstName + " " + user.lastName + " "}
+                            title={<AccountCircleIcon />}
                             menuVariant="light"
                         >
                             <div className={styles.dropdownTextAlign}>
-                                <NavDropdown.Item onClick={() => navigate('/account')}>ניהול חשבון</NavDropdown.Item>
-                                <NavDropdown.Divider />
+                            <NavDropdown.Item disabled>{user.firstName + " " + user.lastName + " "}</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={() => navigate('/account')}>החשבון שלי</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>התנתק</NavDropdown.Item>
                             </div>
                         </NavDropdown>

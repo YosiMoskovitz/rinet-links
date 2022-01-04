@@ -21,10 +21,12 @@ import { ResetPass } from '../Pages/ResetPass'
 import { NewPass } from '../Pages/NewPass'
 import { LinksTable } from '../Components/LinksTable/LinksTable';
 import { AddLink } from '../Pages/Manage/AddLink'
-import { Upload } from '../Components/Upload';
+
+var userType = null;
 
 const PrivateRoutes = () => {
   const loginCtx = useContext(LoginContext)
+  userType = loginCtx.user.role;
   return loginCtx.isLogged ?
     (
       <Layout>
@@ -36,16 +38,16 @@ const PrivateRoutes = () => {
 
 const AxiosResListener = (props) => {
   AxiosInterceptors();
-
   return <></>;
 }
 
 const ManageRoutes = () => {
-  return (
+  return userType === 'admin' ? (
     <ManegeBox>
-      <Outlet />
-    </ManegeBox>
-  )
+    <Outlet />
+  </ManegeBox>
+  ) : 
+  (<Navigate to="/" />)
 }
 
 const LoginCtxProvider = () => {
@@ -78,7 +80,6 @@ export function AppRouter() {
                 <Route path="/manage" element={<Manage />} />
                 <Route path='/manage/addlink' element={<AddLink />} />
                 <Route path='links' element={<LinksTable />} />
-                <Route path='upload' element={<Upload />} />
                 <Route path='account' element={<Account />} />
               </Route>
             </Route>

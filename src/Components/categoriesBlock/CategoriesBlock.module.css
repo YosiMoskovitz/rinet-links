@@ -1,7 +1,7 @@
 .category{
     margin: 40px;
     height: auto;
-    width: 80vw;
+    /* width: 70%; */
     border:1px solid rgb(2, 56, 43);
     border-radius: 10px;
 }

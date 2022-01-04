@@ -3,7 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import EditIcon from '@mui/icons-material/Edit';
 import PeopleIcon from '@mui/icons-material/People';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 export const data = [
     {
@@ -25,12 +25,7 @@ export const data = [
         title: 'ניהול משתמשים',
         icon: <PeopleIcon />,
         link: 'users'
-    },
-    { 
-        title: 'העלאת קובץ',
-        icon: <CloudUploadIcon />,
-        link: 'upload'
-    }     
+    }
 ]
 
 

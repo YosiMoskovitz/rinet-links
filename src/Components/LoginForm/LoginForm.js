@@ -50,7 +50,6 @@ export function LoginForm({ onSubmit, loading, message, setMessage }) {
                 <Row className="mb-3">
                     <Col onClick={handleForgat}><span id="forgot" className={`badge smallBtn ${styles.badgeLight}`}>שכחתי סיסמה</span></Col>
                     <Col onClick={handleRegister}><span id="register" className={`badge smallBtn ${styles.badgeLight}`}>הרשם</span></Col>
-
                 </Row>
             </Form>
             {message && message !== undefined ?
