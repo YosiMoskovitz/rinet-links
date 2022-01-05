@@ -63,8 +63,8 @@ const SetupInterceptors = () => {
                 handler = {
                     type: 'error',
                     code: 409,
-                    title: 'כשל באימות',
-                    message: 'פרטים שגויים',
+                    title: null,
+                    message: res.data,
                     then: null
                 };
                 break;

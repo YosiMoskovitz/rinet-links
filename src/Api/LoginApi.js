@@ -23,6 +23,30 @@ export const LoginReq = async (user) => {
         return result
 }
 
+export const SignupReq = async (user) => {
+    var result = {status: undefined, data: undefined}
+    await Axios.post(`${APIconfig.url}/users/signup`, user)
+        .then((res) => {
+            console.log(res)
+            if (res.status === 200) {
+                result.status = 'OK'
+                result.data = `החשבון נוצר בהצלחה וממתין לאימות. בדוק את תיבת הדוא"ל שלך.`
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            if (err.response && err.response.handler) {
+                result.status = 'ERROR'
+                result.data = err.response.handler.message
+            }
+            else {
+                result.status = 'ERROR'
+                result.data = 'שגיאה פנימית'
+            }
+        })
+        return result
+}
+
 export const LogOutReq = async ()=> {
     var result = {status: undefined}
     await Axios.post(`${APIconfig.url}/users/logout`)
@@ -41,14 +65,46 @@ export const LogOutReq = async ()=> {
     return result
 }
 
+export const accountTokenValid = async (userId, token) => {
+    var result = {status: undefined, data: undefined}
+    await Axios.post(`${APIconfig.url}/users/account-verification`, {userId, token})
+        .then((res) => {
+            if (res.status === 200) {
+                console.log(res)
+                result.type = 'res'
+                result.status = 'OK'
+                result.data = 'החשבון אומת בהצלחה!'
+            }
+        })
+        .catch((err) => {
+            if (err.response && err.response.handler) {
+                result.type = 'res'
+                result.status = 'ERROR'
+                result.data = err.response.handler.message
+            }
+            else {
+                result.type = 'res'
+                result.status = 'ERROR'
+                result.data = 'שגיאה פנימית'
+            }
+        })
+        return result
+}
+
 export const ResetPassEmailReq = async (email) => {
     var result = {status: undefined, data: undefined}
     await Axios.post(`${APIconfig.url}/password-reset/sendEmail`, email)
         .then((res) => {
+            console.log(res)
             if (res.status === 200) {
                 result.type = 'res'
                 result.status = 'OK'
                 result.data = 'דוא"ל לאיפוס סיסמה נשלח בהצלחה!'
+            }
+            else {
+                result.type = 'res'
+                result.status = 'ERROR'
+                result.data = res.message
             }
         })
         .catch((err) => {

@@ -28,8 +28,7 @@ export function LoginForm({ onSubmit, loading, message, setMessage }) {
     }
 
     const handleRegister = () => {
-        setMessage &&
-        setMessage('הרשם')
+        navigate('/signup')
     }
 
     return (

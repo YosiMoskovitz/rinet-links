@@ -17,10 +17,12 @@ import NotFound from '../Pages/NotFound'
 import { Home } from '../Pages/Home';
 import { Manage } from '../Pages/Manage';
 import { Account } from '../Pages/Account/';
-import { ResetPass } from '../Pages/ResetPass'
-import { NewPass } from '../Pages/NewPass'
+import { ResetPass } from '../Pages/ResetPass';
+import { NewPass } from '../Pages/NewPass';
+import { Signup } from '../Pages/Signup'
+import { AccountVeri } from '../Pages/AccountVeri'
 import { LinksTable } from '../Components/LinksTable/LinksTable';
-import { AddLink } from '../Pages/Manage/AddLink'
+import { AddLink } from '../Pages/Manage/AddLink';
 
 var userType = null;
 
@@ -88,7 +90,8 @@ export function AppRouter() {
             <Route path="login" element={<Login />} />
             <Route exec path="reset-password" element={<ResetPass />} />
             <Route path="reset-password/:userId/:token" element={<NewPass />} />
-            <Route path="signup" element={<Login />} />
+            <Route path="account-verification/:userId/:token" element={<AccountVeri />} />
+            <Route path="signup" element={<Signup />} />
           </Route>
           <Route path="/*" element={<NotFound />} />
         </Route>

@@ -1,6 +1,6 @@
 import { React, useContext, useState } from 'react'
 import LinksContext from '../../store/Links-context';
-import { Table, Pagination, Form, Col, Row, Button, Modal, ModalTitle, Alert } from 'react-bootstrap';
+import { Table, Pagination, Form, Col, Row, Button, Modal, ModalTitle, CloseButton, Alert } from 'react-bootstrap';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,7 +27,7 @@ export function LinksTable() {
     const [modalTitle, setModalTile] = useState('');
     const [isDeleteFunc, setIsDeleteFunc] = useState(false);
     const [deletedRes, setDeletedRes] = useState(null);
-    //Fuc state for form submit
+    //Func state for form submit
     const [formSubmit, setFormSubmit] = useState()
     //for Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -134,6 +134,7 @@ export function LinksTable() {
             <Modal show={show} onHide={handelClose}>
                 <Modal.Header>
                     {!deletedRes ? <ModalTitle>{modalTitle}</ModalTitle> : null}
+                    <CloseButton className={styles.closeButton} onClick={handelClose}/>
                 </Modal.Header>
                 <Modal.Body>
                     {isDeleteFunc ? <DeleteModal /> : <FormikLinkForm linkID={modelInfo} formSubmit={formSubmit} />}
