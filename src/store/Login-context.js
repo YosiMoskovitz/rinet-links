@@ -24,7 +24,7 @@ export function LoginContextProvider(props) {
            .then((res) => {
                if (res.status === 200) {
                 setLoginStatus(true);
-                setUser(res.data)
+                setUser(res.data.user)
                }
            }).catch((error)=>{
 

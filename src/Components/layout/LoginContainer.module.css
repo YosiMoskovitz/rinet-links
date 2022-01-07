@@ -2,7 +2,6 @@
     position: absolute;
     padding: 0;
     margin: 0;
-    height: 100%;
     width: 100vw;
     background-color: rgb(199, 199, 199)
 }
@@ -36,7 +35,7 @@
 }
 
 @media screen and (max-width:1280px) {
-    .main {
+    .felids {
         margin: 20vh 30vw;
         padding: 3rem 5rem;
     }

@@ -2,7 +2,8 @@ export const data = {
     links: {
         addCategory : {
             title: 'הוסף קטגוריה',
-            link: '/addcategory'
+            link: '/addcategory',
+            
         },
         editCategory: {
             title: 'ערוך קטגוריה',

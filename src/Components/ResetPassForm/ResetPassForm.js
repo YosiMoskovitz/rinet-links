@@ -11,7 +11,7 @@ export function ResetPassForm({ onSubmit, loading, message, setMessage }) {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
-        const email = emailInputRef.current.value;
+        const email = emailInputRef.current.value.toLowerCase();
         if (email === undefined || email === '' || email === null) {
             setMessage({
                 type: 'req',
@@ -36,17 +36,23 @@ export function ResetPassForm({ onSubmit, loading, message, setMessage }) {
     return (
         <div className={styles.felids}>
             {message && message.data !== undefined && message.type === 'res' ?
-                <Alert variant={message.status === 'OK' ? 'success' : 'danger'} style={{ marginTop: 20 }}>
-                    {message.status === 'OK' ? <CheckCircleIcon color='success' fontSize='large' />
-                    : <DangerousIcon color='danger' fontSize='large' />} {message.data}
-                </Alert>
+                <div>
+                    <Alert variant={message.status === 'OK' ? 'success' : 'danger'} style={{ marginTop: 20 }}>
+                        {message.status === 'OK' ? <CheckCircleIcon color='success' fontSize='large' />
+                            : <DangerousIcon color='danger' fontSize='large' />} {message.data}
+                    </Alert>
+                    <Row className="mb-3">
+                        <Col onClick={() => navigate('/login')}><span id="login" className={`badge smallBtn ${styles.badgeLight}`}>חזרה למסך כניסה</span></Col>
+                    </Row>
+                </div>
+
                 :
                 <div>
                     <h3 className={styles.title}>איפוס סיסמה</h3>
                     <Form noValidate>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>אימייל</Form.Label>
-                            <Form.Control type="email" placeholder={`הכנס כתובת דוא"ל`}  ref={emailInputRef} disabled={loading} onChange={handleChange} required/>
+                            <Form.Control type="email" placeholder={`הכנס כתובת דוא"ל`} ref={emailInputRef} disabled={loading} onChange={handleChange} required />
                         </Form.Group>
                         <div className={`d-grid gap-2 ${styles.loginBtn}`}>
                             <Button variant="primary" type="submit" onClick={onFormSubmit} disabled={loading} >שלח אימייל לאיפוס</Button>
@@ -56,7 +62,7 @@ export function ResetPassForm({ onSubmit, loading, message, setMessage }) {
                         </Row>
                     </Form>
                     {message && message.data !== undefined ?
-                <Alert variant={message.status === 'OK' ? 'success' : 'danger'} style={{ marginTop: 20 }}>{message.data}</Alert> : null}
+                        <Alert variant={message.status === 'OK' ? 'success' : 'danger'} style={{ marginTop: 20 }}>{message.data}</Alert> : null}
                 </div>
             }
         </div>

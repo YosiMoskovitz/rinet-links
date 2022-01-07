@@ -6,7 +6,7 @@ import { CategoriesBlock } from '../../Components/categoriesBlock/CategoriesBloc
 
 export function Home() {
     const LinksCtx = useContext(LinksContext);
-    console.log('home render');
+
     return (
         <section className={styles.main}>
             <CategoriesBlock categories={LinksCtx.categories} />

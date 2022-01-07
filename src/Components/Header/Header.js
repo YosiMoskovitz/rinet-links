@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 //icon for user pic
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import styles from './Header.module.css'
+import { InfoDivs } from '../InfoDivs'
 
 export function Header () {
     const navigate = useNavigate();
@@ -30,9 +31,10 @@ export function Header () {
         <Navbar variant="light" className={styles.bg} expand="md">
             <Container fluid>
                 <Navbar.Brand href="#home">ריינט - קישורים להורדה</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-dark-example" />
-                <Navbar.Collapse id="navbar-dark-example">
-                    <Nav className={`me-auto ${styles.navbar}`}>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <InfoDivs />
+                <Navbar.Collapse>
+                    <Nav className={`me-auto my-2 my-lg-0 ${styles.navbar}`} navbarScroll>
                         <NavDropdown
                             id="nav-dropdown-dark-example"
                             title={<AccountCircleIcon />}
@@ -51,3 +53,4 @@ export function Header () {
         </Navbar>
     )
 }
+

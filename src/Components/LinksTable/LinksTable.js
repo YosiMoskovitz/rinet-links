@@ -181,7 +181,7 @@ export function LinksTable() {
                             <Form.Label>כמות שורות בדף</Form.Label>
                         </Col>
                         <Col xs="auto" className="my-1">
-                            <Form.Select className="me-sm-1" id="inlineFormCustomSelect" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>
+                            <Form.Select className="ms-1" id="inlineFormCustomSelect" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>
                                 <option default value="0">הכל</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
@@ -211,7 +211,7 @@ export function LinksTable() {
                         </Col>
                     </Row>
                 </div>
-                <Table striped bordered hover>
+                <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
                             <th onClick={() => { sorting('_id'); handelColumClick('_id') }} className={orderStyle('_id')}>{`#`}</th>

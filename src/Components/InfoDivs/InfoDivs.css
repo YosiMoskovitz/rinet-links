@@ -1,0 +1,28 @@
+
+.slider-container {
+   position:absolute;
+   left: 50%;
+   top: 25%;
+   font-size: 16px; 
+ }
+ 
+ .fade-enter .slide {
+   opacity: 0;
+   transform: translateX(-100%);
+ }
+ .fade-enter-active .slide {
+   opacity: 1;
+   transform: translateX(0%);
+ }
+ .fade-exit .slide {
+   opacity: 1;
+   transform: translateX(0%);
+ }
+ .fade-exit-active .slide {
+   opacity: 0;
+   transform: translateX(100%);
+ }
+ .fade-enter-active .slide,
+ .fade-exit-active .slide {
+   transition: opacity 500ms, transform 500ms;
+ }

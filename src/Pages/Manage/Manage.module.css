@@ -1,8 +1,5 @@
 .main{
-    margin: 3rem;
+
     height: 600px;
-    padding: 3rem;
-    width: 83vw;
-    border:1px solid rgb(2, 56, 43);
-    border-radius: 10px;
+    width: 100%;
 }

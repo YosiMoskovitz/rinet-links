@@ -72,11 +72,11 @@ export function SignupForm({ formSubmit, loading, message }) {
                             password: Yup.string().min(6, passValidMsg).required(requiredMsg),
                             passwordVer: Yup.string().oneOf([Yup.ref('password'), null], 'סיסמאות לא זהות').required(requiredMsg)
                         })}
-                        onSubmit={(values, { setSubmitting, resetForm }) => {
-
+                        onSubmit={async (values, { setSubmitting, resetForm }) => {
                             if (formSubmit) {
                                 setSubmitting(true);
-                                formSubmit(values).then(() => { setSubmitting(false); })
+                                await formSubmit(values);
+                                setSubmitting(false);
 
                             }
                         }}
@@ -112,7 +112,7 @@ export function SignupForm({ formSubmit, loading, message }) {
                                 />
                                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                                     <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ?
-                                        <div>"אנא המתן... "<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /></div>
+                                        <div>אנא המתן... <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /></div>
                                         : "הרשמה"}</Button>
                                     <Row className="mb-3">
                                         <Col onClick={handleLogin}><span id="forgot" className={`badge smallBtn ${styles.badgeLight}`}>כבר רשום?</span></Col>

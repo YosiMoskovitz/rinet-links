@@ -10,7 +10,8 @@ export function Signup() {
     const SignupSubmit = (user) => {
         const {email, firstName, lastName, password} = user;
         setIsLoading(true)
-        SignupReq({email, firstName, lastName, password}).then((res)=> {
+        SignupReq({email : email.toLowerCase(),
+             firstName, lastName, password}).then((res)=> {
             if (res.status === 'OK'){
                 setMsg(res)
             }

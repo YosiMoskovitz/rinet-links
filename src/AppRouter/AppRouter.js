@@ -78,11 +78,11 @@ export function AppRouter() {
           <Route element={<PrivateRoutes />}>
             <Route element={<LinksCtxProvider />}>
               <Route index element={<Home />} />
+              <Route path='account' element={<Account />} />
               <Route element={<ManageRoutes />}>
                 <Route path="/manage" element={<Manage />} />
                 <Route path='/manage/addlink' element={<AddLink />} />
                 <Route path='links' element={<LinksTable />} />
-                <Route path='account' element={<Account />} />
               </Route>
             </Route>
           </Route>

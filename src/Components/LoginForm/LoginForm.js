@@ -11,7 +11,7 @@ export function LoginForm({ onSubmit, loading, message, setMessage }) {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
-        const email = emailInputRef.current.value;
+        const email = emailInputRef.current.value.toLowerCase();
         const password = passwordInputRef.current.value;
 
         onSubmit && onSubmit({ email, password });
