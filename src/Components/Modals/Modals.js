@@ -13,6 +13,7 @@ export const Modals = ({ type, title, show, setShow, func }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState(undefined);
+    const [shouldNavigate, setShouldNavigate] = useState(false);
     const navigate = useNavigate()
 
     const DeleteModal = () => {
@@ -44,13 +45,14 @@ export const Modals = ({ type, title, show, setShow, func }) => {
 
     const handelClose = () => {
         setShow(false);
-        if (type === 'delete') navigate('/login', { replace: true })
+        if (shouldNavigate) navigate('/login', { replace: true })
     };
 
     const handleDelete = async () => {
         setIsLoading(true);
         const res = await func();
         setMessage(res);
+        if (message.status === 'OK') setShouldNavigate(true);
         setIsLoading(false);
     }
 
