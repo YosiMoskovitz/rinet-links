@@ -3,7 +3,8 @@
     padding: 0;
     margin: 0;
     width: 100vw;
-    background-color: rgb(199, 199, 199)
+    background-color: rgb(199, 199, 199);
+    height: 100%;
 }
 .felids {
     margin: 25vh 37vw;
@@ -39,4 +40,8 @@
         margin: 20vh 30vw;
         padding: 3rem 5rem;
     }
+    .mainDiv{
+        height: 110vh;
+    }
+
 }

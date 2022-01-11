@@ -1,0 +1,10 @@
+.closeButton{
+    margin: 0 !important;
+}
+.deleteContainer{
+    margin: 2rem !important;
+}
+.deleteBtns{
+    margin-left: 5% !important;
+    padding: 1% 12% !important;
+}

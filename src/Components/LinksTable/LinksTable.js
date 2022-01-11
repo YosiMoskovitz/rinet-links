@@ -10,6 +10,7 @@ import { OutClicker } from '../Utils';
 import { AddLink, EditLink, DeleteLink } from '../Utils';
 import { FormikLinkForm } from '../LinkForm'
 import styles from './LinksTable.module.css'
+import translate from '../Utils/engToHeb.json'
 
 const getCategory = (link, categories) => {
     var category = categories.find(category => category._id === link.categoryId);
@@ -18,6 +19,7 @@ const getCategory = (link, categories) => {
 
 export function LinksTable() {
     const LinksCtx = useContext(LinksContext);
+    const titles = Object.keys(LinksCtx.links[0]);
 
     const [activeRow, setActiveRow] = useState(null);
     const [sortedColum, setSortedColum] = useState(null);
@@ -207,29 +209,27 @@ export function LinksTable() {
                             </Button>
                         </Col>
                         <Col xs="auto" className="me-auto col-md-3">
-                            <Form.Control type="text" placeholder="חיפוש..." onChange={(e) => setSearchTerm(e.target.value)} />
+                            <Form.Control type="search" placeholder="חיפוש..." onChange={(e) => setSearchTerm(e.target.value)} />
                         </Col>
                     </Row>
                 </div>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th onClick={() => { sorting('_id'); handelColumClick('_id') }} className={orderStyle('_id')}>{`#`}</th>
-                            <th onClick={() => { sorting('title'); handelColumClick('title') }} className={orderStyle('title')}>{`שם`}</th>
-                            <th onClick={() => { sorting('path'); handelColumClick('path') }} className={orderStyle('path')}>{`כתובת`}</th>
-                            <th onClick={() => { sorting('categoryId'); handelColumClick('categoryId') }} className={orderStyle('categoryId')}>{"קטגוריה"}</th>
-                            <th onClick={() => { sorting('description'); handelColumClick('description') }} className={orderStyle('description')}>{`תיאור`}</th>
+                            {titles.map((title)=> {
+                                return <th key={title} onClick={() => { sorting(title); handelColumClick(title) }} className={orderStyle(title)}>{translate[title]}</th>
+                            })}
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.map((link, i) => {
+                        {currentItems.map((item, i) => {
                             return (
-                                <tr key={i} onClick={() => { handelRowClick(link._id, i) }} className={activeRow === i ? `${styles.activeRow}` : null}>
+                                <tr key={i} onClick={() => { handelRowClick(item._id, i) }} className={activeRow === i ? `${styles.activeRow}` : null}>
                                     <td>{i + indexOfFirstItem + 1}</td>
-                                    <td>{link.title}</td>
-                                    <td>{link.path}</td>
-                                    <td>{getCategory(link, LinksCtx.categories)}</td>
-                                    <td>{link.description}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.path}</td>
+                                    <td>{getCategory(item, LinksCtx.categories)}</td>
+                                    <td>{item.description}</td>
                                 </tr>
                             );
                         })}

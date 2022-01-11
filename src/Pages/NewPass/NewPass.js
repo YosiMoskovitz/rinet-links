@@ -11,7 +11,6 @@ export function NewPass() {
 
     const [msg, setMsg] = useState(undefined);
     const [renewalToken, setRenewalToken] = useState(undefined);
-    const [isLoading, setIsLoading] = useState(false);
     const [pageLoading, setPageLoading] = useState(true);
 
     useEffect(() => {
@@ -23,13 +22,9 @@ export function NewPass() {
         })
     }, [userId, token, navigate])
 
-    const NewPassSubmit = (newPass) => {
-        setIsLoading(true)
-        NewPassReq(userId, renewalToken, newPass).then((res) => {
-            setMsg(res)
-            setIsLoading(false)
-        })
-
+    const NewPassSubmit = async ({password}) => {
+        const res = await NewPassReq(userId, renewalToken, password);
+        setMsg(res)
     }
 
     if (pageLoading) {
@@ -38,7 +33,7 @@ export function NewPass() {
 
     return (
         <section >
-            <NewPassForm onSubmit={NewPassSubmit} message={msg} setMessage={setMsg} loading={isLoading} />
+            <NewPassForm formSubmit={NewPassSubmit} message={msg} setMessage={setMsg} />
         </section>
     )
 

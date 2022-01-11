@@ -5,23 +5,21 @@ import { SignupForm } from '../../Components/SignupForm';
 
 export function Signup() {
     const [msg, setMsg] = useState(undefined);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const SignupSubmit = (user) => {
-        const {email, firstName, lastName, password} = user;
-        setIsLoading(true)
-        SignupReq({email : email.toLowerCase(),
-             firstName, lastName, password}).then((res)=> {
-            if (res.status === 'OK'){
-                setMsg(res)
-            }
-            if (res.status === 'ERROR') {
-                setMsg(res)
-                setIsLoading(false)
-            }
-        })
-        
- 
+    const SignupSubmit = async (user) => {
+        const { email, firstName, lastName, password } = user;
+        const res = await SignupReq({
+            email: email.toLowerCase(),
+            firstName, lastName, password
+        });
+        if (res.status === 'OK') {
+            setMsg(res)
+        }
+        if (res.status === 'ERROR') {
+            setMsg(res)
+        }
+
+
     }
     // const EmailCheck = (email)=> {
     //     Axios.get(`${APIconfig.url}/users/${email}`)
@@ -34,10 +32,10 @@ export function Signup() {
     //     })
     // }
 
-        return (
-            <section>
-                <SignupForm formSubmit={SignupSubmit} loading={isLoading} message={msg}/>
-            </section>
-        )
+    return (
+        <section>
+            <SignupForm formSubmit={SignupSubmit} message={msg} setMessage={setMsg} />
+        </section>
+    )
 
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios'
 
 import LoginContext from '../../store/Login-context'
+import translate from '../../Components/Utils/engToHeb.json';
 
 const SetupInterceptors = () => {
     const LoginCtx = useContext(LoginContext);
@@ -64,7 +65,7 @@ const SetupInterceptors = () => {
                     type: 'error',
                     code: 409,
                     title: null,
-                    message: res.data,
+                    message: translate[res.data],
                     then: null
                 };
                 break;
