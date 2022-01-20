@@ -11,8 +11,6 @@ const hebDate = new HDate(today);
 var counter = 0;
 var infoItems = [];
 
-
-
 export const InfoDivs = () => {
     const [nowTime, setNowTime] = useState(getTime());
     const [state, setState] = useState(counter);
@@ -73,7 +71,7 @@ const getHebDate = () => {
 
 const getDafYomi = () => {
     const dafYomi = new DafYomi(today);
-    const masecta = dafYomi.render('he').split(' ')[0]
+    const masecta = dafYomi.render('he').split(/[0-9]/)[0];
     const daf = gematriya(dafYomi.getBlatt())
     return masecta + ' ' + daf
 }

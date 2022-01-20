@@ -8,18 +8,13 @@ export function Signup() {
 
     const SignupSubmit = async (user) => {
         const { email, firstName, lastName, password } = user;
-        const res = await SignupReq({
-            email: email.toLowerCase(),
-            firstName, lastName, password
-        });
+        const res = await SignupReq({email, firstName, lastName, password});
         if (res.status === 'OK') {
             setMsg(res)
         }
         if (res.status === 'ERROR') {
             setMsg(res)
         }
-
-
     }
     // const EmailCheck = (email)=> {
     //     Axios.get(`${APIconfig.url}/users/${email}`)

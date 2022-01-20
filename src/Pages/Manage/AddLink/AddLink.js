@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { APIconfig } from '../../../Config'
 
 import styles from './AddLink.module.css'
-import { FormikLinkForm } from '../../../Components/LinkForm';
+import { LinkForm } from '../../../Components/LinkForm';
 
 export function AddLink() {
 
@@ -23,7 +23,7 @@ export function AddLink() {
         <div className={`container ${styles.container}`}>
             <div className="form-wrapper">
                 <h4 className={styles.title}>הוסף קישור</h4>
-                <FormikLinkForm formSubmit={LinkSubmit} /> 
+                <LinkForm formSubmit={LinkSubmit} /> 
             </div>
         </div>
         // {/* <div className={styles.container}> */}

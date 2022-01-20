@@ -5,19 +5,15 @@ import { ResetPassForm } from '../../Components/ResetPassForm';
 
 export function ResetPass() {
     const [msg, setMsg] = useState(undefined);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const SendEmailSubmit = (email) => {
-        setIsLoading(true)
-        ResetPassEmailReq(email).then((res)=> {
-            setMsg(res)
-            setIsLoading(false)
-        })
- 
+    const SendEmailSubmit = async (email) => {
+        const res = await ResetPassEmailReq(email);
+        setMsg(res)
+
     }
         return (
             <section >
-                <ResetPassForm onSubmit={SendEmailSubmit} message={msg} setMessage={setMsg} loading={isLoading}/>
+                <ResetPassForm formSubmit={SendEmailSubmit} message={msg}/>
             </section>
         )
 

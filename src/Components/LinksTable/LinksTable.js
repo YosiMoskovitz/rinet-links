@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import { OutClicker } from '../Utils';
 import { AddLink, EditLink, DeleteLink } from '../Utils';
-import { FormikLinkForm } from '../LinkForm'
+import { LinkForm } from '../LinkForm';
 import styles from './LinksTable.module.css'
 import translate from '../Utils/engToHeb.json'
 
@@ -139,7 +139,7 @@ export function LinksTable() {
                     <CloseButton className={styles.closeButton} onClick={handelClose}/>
                 </Modal.Header>
                 <Modal.Body>
-                    {isDeleteFunc ? <DeleteModal /> : <FormikLinkForm linkID={modelInfo} formSubmit={formSubmit} />}
+                    {isDeleteFunc ? <DeleteModal /> : <LinkForm linkID={modelInfo} formSubmit={submitMiddleware} />}
                     <Modal.Footer className="d-flex justify-content-start"><Button variant='success' size="sm" onClick={handleRefreshGlobalCTX}>{'רענן טבלאות'}</Button></Modal.Footer>
                 </Modal.Body>
             </Modal>
@@ -170,6 +170,11 @@ export function LinksTable() {
         DeleteLink(modelInfo).then((res) => {
             setDeletedRes(res.handler)
         })
+    }
+    // CRUD funcs manager
+    const submitMiddleware = async (values) => {
+        const res = await formSubmit(values);
+        return res.handler;
     }
 
 

@@ -9,7 +9,7 @@ import { ChangePass } from '../../Pages/ChangePass';
 
 import styles from './Modals.module.css'
 
-export const Modals = ({ type, title, show, setShow, func }) => {
+export const Modals = ({ type, title, user, show, setShow, func }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState(undefined);
@@ -51,8 +51,8 @@ export const Modals = ({ type, title, show, setShow, func }) => {
     const handleDelete = async () => {
         setIsLoading(true);
         const res = await func();
+        if (res.status === 'OK') setShouldNavigate(true);
         setMessage(res);
-        if (message.status === 'OK') setShouldNavigate(true);
         setIsLoading(false);
     }
 
@@ -61,7 +61,7 @@ export const Modals = ({ type, title, show, setShow, func }) => {
             case 'changePass':
                 return <ChangePass />
             case 'editUser':
-                return <ChangePass formSubmit={func} />
+                return <ChangePass user={user} />
             case 'delete':
                 return <DeleteModal />
             default:

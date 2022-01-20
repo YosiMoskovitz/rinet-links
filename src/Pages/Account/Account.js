@@ -41,7 +41,7 @@ export const Account = () => {
     const handelChangeDetails = () => {
         setModalType("editUser");
         setModalTitle("ערוך פרטים - work in progress");
-        setModalFunc(() => DeleteUserReq);
+        setModalFunc(() => ChangePassReq);
         setShowModal(true);
     }
 
@@ -81,6 +81,7 @@ export const Account = () => {
                     show={showModal}
                     setShow={setShowModal}
                     func={modalFunc}
+                    user={userCTX.user}
                 /> : null}
         </div >
     )
