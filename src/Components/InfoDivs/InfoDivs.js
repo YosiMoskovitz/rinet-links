@@ -1,6 +1,7 @@
 import { React, useState, useEffect, /*useRef*/ } from 'react'
 import { HDate, Locale, DafYomi, gematriya, Sedra } from '@hebcal/core';
 import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { getFormattedDate, getNowTime, getHebDate} from '../Utils';
 
 import './InfoDivs.css'
 
@@ -12,22 +13,22 @@ var counter = 0;
 var infoItems = [];
 
 export const InfoDivs = () => {
-    const [nowTime, setNowTime] = useState(getTime());
+    const [nowTime, setNowTime] = useState(getNowTime());
     const [state, setState] = useState(counter);
 
     // const nodeRef = useRef(null);
 
 
     useEffect(() => {
-        setInterval(() => setNowTime(getTime()), 1000);
+        setInterval(() => setNowTime(getNowTime()), 1000);
         setInterval(() => setState(getdivId()), 10000);
     }, []);
 
     infoItems = [
         nowTime,
         getParash(),
-        getHebDate(),
-        getFormattedDate(Date),
+        getHebDate(today),
+        getFormattedDate(today),
         `דף היומי:  ${getDafYomi()}`,
     ]
     const getdivId = ()=> {
@@ -53,20 +54,6 @@ export const InfoDivs = () => {
             </SwitchTransition>
         </div>
     )
-}
-
-const getTime = () => {
-    let today = new Date();
-    const time = today.toTimeString();
-    return time.split(' ')[0];
-}
-
-const getFormattedDate = () => {
-    return today.toLocaleDateString("en-GB")
-}
-
-const getHebDate = () => {
-    return Locale.hebrewStripNikkud(hebDate.renderGematriya());
 }
 
 const getDafYomi = () => {

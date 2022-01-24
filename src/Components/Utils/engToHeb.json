@@ -37,6 +37,26 @@
     "categoryId": "קטגוריה",
     "description": "תיאור",
     "requiredMsg": "שדה נדרש",
-    "user_updated_successfully": "פרטים עודכנו בהצלחה!"
-
+    "basic": "בסיסי",
+    "design and graphics" : "גרפיקה ועיצוב",
+    "games": "משחקים",
+    "accessories": "עזרי מחשב",
+    "user_updated_successfully": "פרטים עודכנו בהצלחה!",
+    "id": "#",
+    "email": "דוא''ל",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "role": "הרשאות",
+    "status": "סטטוס",
+    "joined": "הצטרפות",
+    "lastLogin": "התחבר לאחרונה",
+    "lastPassChange": "שינוי סיסמה א.",
+    "isEmailVerified": "דוא''ל אומת?",
+    "createdVia": "נוצר ע''י",
+    "true": "כן",
+    "false": "לא",
+    "unknown": "לא ידוע",
+    "Admin_user_deleted": "משתמש נמחק בהצלחה",
+    "Admin_user_updated_successfully": "פרטים עודכנו בהצלחה!",
+    "Admin_New_User_Created": "החשבון נוצר בהצלחה עם סיסמת ברירת המחדל."
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 import { Form } from 'react-bootstrap'
+import translate from '../Utils/engToHeb.json';
 
 export const InputTextField = ({ label, ...props }) => {
     const [field, meta] = useField(props);
@@ -38,9 +39,9 @@ export  const InputSelectField = ({label, array, ...props }) => {
                 {array.map((item, i) => (
                     <option
                         key={i}
-                        value={item._id}
+                        value={item.id}
                     >
-                        {item.title}
+                        {translate[item.title]}
                     </option>
                 ))}
             </Form.Select>

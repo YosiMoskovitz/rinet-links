@@ -9,14 +9,14 @@ import styles from './LinkForm.module.css'
 import translate from '../Utils/engToHeb.json'
 
 
-export const LinkForm = ({ formSubmit, linkID }) => {
+export const LinkForm = ({ formSubmit, id }) => {
     const LinksCtx = useContext(LinksContext);
-    const link = LinksCtx.links.find((link) => link._id === linkID)
+    const link = LinksCtx.links.find((link) => link.id === id)
 
-    const [uploadFile, setUploadFile] = useState(linkID ? false : true);
+    const [uploadFile, setUploadFile] = useState(id ? false : true);
 
     const initialValues = {
-        _id: link?._id ?? null,
+        id: link?.id ?? null,
         title: link?.title ?? '',
         path: link?.path ?? '',
         categoryId: link?.categoryId ?? '',
@@ -30,11 +30,11 @@ export const LinkForm = ({ formSubmit, linkID }) => {
         path: Yup.string()
             .url(translate.invalidUrlMsg)
             .required(translate.requiredMsg),
-        categoryId: Yup.string().oneOf(LinksCtx.categories.map((category) => category._id), translate.invalidCategoryMsg).required(translate.requiredMsg),
+        categoryId: Yup.string().oneOf(LinksCtx.categories.map((category) => category.id), translate.invalidCategoryMsg).required(translate.requiredMsg),
         description: Yup.string(),
     });
 
-    const Fields = ({setFieldValue, isSubmitting, submitRes}) => {
+    const Fields = ({ setFieldValue, isSubmitting, submitRes }) => {
         return (
             <>
                 <InputTextField
@@ -43,7 +43,7 @@ export const LinkForm = ({ formSubmit, linkID }) => {
                     disabled={isSubmitting}
                 />
                 {uploadFile ?
-                    <Upload setFormikVal={setFieldValue} disabled={isSubmitting}/>
+                    <Upload setFormikVal={setFieldValue} disabled={isSubmitting} />
                     : null
                 }
                 <div style={{
@@ -80,7 +80,8 @@ export const LinkForm = ({ formSubmit, linkID }) => {
                 />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                     <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "אנא המתן..." : "שמור"}</Button>
-                    {submitRes && submitRes.code !== 403 ? <p className={`d-flex justify-content-center alert ${styles.message} ${submitRes.type === 'success' ? 'alert-success' : 'alert-danger'}`} role="alert">{submitRes.message}</p> : null}
+                    {submitRes && submitRes.code !== 403 ? <p className={`d-flex justify-content-center alert ${styles.message} ${submitRes.type === 'success' ? 'alert-success' : 'alert-danger'}`}
+                        role="alert">{submitRes.message}</p> : null}
                 </div>
             </>
         )

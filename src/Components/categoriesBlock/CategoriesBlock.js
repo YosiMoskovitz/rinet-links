@@ -2,7 +2,7 @@ import { React } from 'react';
 import { LinkList } from '../links-list/links-list';
 
 import classes from './CategoriesBlock.module.css'
-
+import translate from '../../Components/Utils/engToHeb.json'
 
 export function CategoriesBlock({ categories }) {
     const Title = (props) => {
@@ -16,10 +16,10 @@ export function CategoriesBlock({ categories }) {
     return (
         <ul>
             {categories.map((category, i) => (
-                <Title categoryTitle={category.title} key={i}>
+                <Title categoryTitle={translate[category.title]} key={i}>
                     <LinkList
                         key={i}
-                        id={category._id}
+                        id={category.id}
                         description={category.description}
                     />
                 </Title>

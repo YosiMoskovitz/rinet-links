@@ -59,12 +59,32 @@ export const ChangePassReq = async (oldPassword, newPassword) => {
 }
 
 export const EditUserReq = async (user) => {
-    var result = await LoginAxios.post(`/users/change-password`, user)
+    var result = await LoginAxios.patch(`/users/edit-user`, user);
+    return result;
+}
+
+export const EditUserAdminReq = async (user) => {
+    var result = await LoginAxios.patch(`/users/edit-user-a`, user);
     return result;
 }
 
 export const DeleteUserReq = async () => {
-    var result = await LoginAxios.post(`/users/delete-user`)
+    var result = await LoginAxios.delete(`/users/delete-user`);
+    return result;
+}
+
+export const AddUserReq = async (user) => {
+    //need to add a default password <--
+    let userData = user;
+    userData.password = '!Aa123456'
+    delete userData.userId
+    delete userData.isEmailVerified
+    var result = await LoginAxios.post(`/users/add-user`, userData);
+    return result;
+}
+
+export const DeleteUserAdminReq = async (userId) => {
+    var result = await LoginAxios.delete(`/users/delete-user-a/${userId}`);
     return result;
 }
 

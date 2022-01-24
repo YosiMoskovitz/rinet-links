@@ -5,7 +5,7 @@ import { Button, Modal, ModalTitle, CloseButton, Alert, Spinner } from 'react-bo
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import { ChangePass } from '../../Pages/ChangePass';
-// import { EditUser } from '../../Pages/EditUser';
+import { EditUser } from '../../Pages/EditUser';
 
 import styles from './Modals.module.css'
 
@@ -61,7 +61,7 @@ export const Modals = ({ type, title, user, show, setShow, func }) => {
             case 'changePass':
                 return <ChangePass />
             case 'editUser':
-                return <ChangePass user={user} />
+                return <EditUser user={user} />
             case 'delete':
                 return <DeleteModal />
             default:

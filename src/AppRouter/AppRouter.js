@@ -21,14 +21,15 @@ import { ResetPass } from '../Pages/ResetPass';
 import { NewPass } from '../Pages/NewPass';
 import { Signup } from '../Pages/Signup'
 import { AccountVeri } from '../Pages/AccountVeri'
-import { LinksTable } from '../Components/LinksTable/LinksTable';
+import { LinksTable } from '../Components/LinksTable';
+import { UsersTable } from '../Components/UsersTable';
 import { AddLink } from '../Pages/Manage/AddLink';
 
 var userType = null;
 
 const PrivateRoutes = () => {
   const loginCtx = useContext(LoginContext)
-  userType = loginCtx.user.role;
+  userType = loginCtx.user.role.title;
   return loginCtx.isLogged ?
     (
       <Layout>
@@ -83,6 +84,7 @@ export function AppRouter() {
                 <Route path="/manage" element={<Manage />} />
                 <Route path='/manage/addlink' element={<AddLink />} />
                 <Route path='links' element={<LinksTable />} />
+                <Route path='users' element={<UsersTable />} />
               </Route>
             </Route>
           </Route>

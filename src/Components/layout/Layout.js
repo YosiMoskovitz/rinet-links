@@ -12,7 +12,7 @@ export function Layout() {
   const [isAdmin, setIsAdmin] = useState();
 
   useEffect (() => {
-    setIsAdmin(LoginCTX.user.role === 'admin');
+    setIsAdmin(LoginCTX.user.role.title === 'admin');
   }, [LoginCTX.user.role])
 
   return (

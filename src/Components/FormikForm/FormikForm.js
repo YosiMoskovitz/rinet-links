@@ -6,7 +6,6 @@ import { ErrorModal } from '../ErrorModal';
 export const FormikForm = ({ initialValues, schema, Fields, formSubmit }) => {
 
     const [submitRes, setSubmitRes] = useState(null);
-
     return (
         <>
             <Formik

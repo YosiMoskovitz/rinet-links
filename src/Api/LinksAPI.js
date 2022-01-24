@@ -12,7 +12,7 @@ export const AddLink = (newLink) => {
 }
 
 export const EditLink = (Link) => {
-    var result = Axios.patch(`${APIconfig.url}/links/${Link._id}`, Link)
+    var result = Axios.patch(`${APIconfig.url}/links/${Link.id}`, Link)
         .then((res) => {
             return resReturn(res, 'עודכן')
         }).catch((err) => {
