@@ -29,7 +29,7 @@ var userType = null;
 
 const PrivateRoutes = () => {
   const loginCtx = useContext(LoginContext)
-  userType = loginCtx.user.role.title;
+  userType = loginCtx.user.role?.title;
   return loginCtx.isLogged ?
     (
       <Layout>

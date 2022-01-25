@@ -19,7 +19,6 @@ export function EditUser({user}) {
         const res = await editFunc(user);
         setMsg(res)
     }
-    console.log(editFunc)
     return (
         <section >
             <EditUserForm formSubmit={EditUserSubmit} message={msg} user={user} />
