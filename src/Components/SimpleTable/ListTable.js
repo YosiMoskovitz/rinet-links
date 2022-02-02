@@ -2,13 +2,7 @@ import  React, {useState, useEffect } from 'react'
 import { getAllDonations, getAllUsers } from '../../Api/DonationsApi'
 import { Loading } from '../../Pages/Loading';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 import { DataGrid } from '@mui/x-data-grid';
 import { getFormattedDate } from '../../Components/Utils';
 
