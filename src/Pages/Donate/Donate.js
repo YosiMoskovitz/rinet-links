@@ -11,7 +11,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import { APIconfig } from '../../Config';
 
-
+import { registerDonation } from '../../Api/DonationsApi'
 
 
 
@@ -125,7 +125,7 @@ export const Donate = () => {
     };
 
     const handelDonateClick = async (values) => {
-        var res = nedarimComms({
+        var re = nedarimComms({
             'Name': 'FinishTransaction2',
             'Value': {
                 'Mosad': '0',
@@ -151,11 +151,15 @@ export const Donate = () => {
                 'Param2': '',
                 'ForceUpdateMatching': '0', //מיועד לקמפיין אם מעוניינים שהמידע יידחף ליעד, למרות שזה לא נהוג באייפרם
 
-                'CallBack': `${APIconfig.url}/donationes/new-donation/${userCTX.user.id}`,
+                'CallBack': '',
                 // 'Tokef': document.getElementById('Tokef').value //אם אתם מנהלים את התוקף בדף שלכם (מיועד למי שרוצה להפריד בין חודש לשנה ורוצה לעצב מותאם אישית)
             }
+        }).then(async (res)=> {
+            return await registerDonation(userCTX.user.id, res);
+        }).then((res)=> {
+            return res;
         });
-        return res;    
+        return re;    
     }
 
 
@@ -177,8 +181,8 @@ export const Donate = () => {
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
                             handelDonateClick(values).then((result) => {
-                                setResMessage(result);
                                 setSubmitting(false);
+                                setResMessage(result);
                             });
                             
                         }}
