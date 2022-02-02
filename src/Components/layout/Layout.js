@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect} from 'react';
+import {React, useContext, useState, useEffect} from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../sidebar/';
 import classes from './Layout.module.css';

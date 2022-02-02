@@ -58,5 +58,13 @@
     "unknown": "לא ידוע",
     "Admin_user_deleted": "משתמש נמחק בהצלחה",
     "Admin_user_updated_successfully": "פרטים עודכנו בהצלחה!",
-    "Admin_New_User_Created": "החשבון נוצר בהצלחה עם סיסמת ברירת המחדל."
+    "Admin_New_User_Created": "החשבון נוצר בהצלחה עם סיסמת ברירת המחדל.",
+    "zeout": "מספר זהות",
+    "country": "מדינה",
+    "street": "כתובת",
+    "city": "עיר",
+    "phone": "טלפון",
+    "reCaptchaMsg": "אתה רובוט?! 🤔",
+    "normal": "רגיל",
+    "HK": "הוראת קבע"
 }

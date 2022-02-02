@@ -1,13 +1,13 @@
 import { React } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormikForm, InputTextField } from '../FormikForm';
+import { FormikForm, InputTextField, ReCAPTCHAField } from '../FormikForm';
 import { Row, Col, Button, Alert, Spinner } from 'react-bootstrap'
 import * as Yup from 'yup';
 import styles from '../layout/LoginContainer.module.css'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
-
 import translate from '../Utils/engToHeb.json'
+
 
 export function SignupForm({ formSubmit, message }) {
     const navigate = useNavigate();
@@ -20,22 +20,34 @@ export function SignupForm({ formSubmit, message }) {
         email: '',
         firstName: '',
         lastName: '',
+        zeout: '',
+        country: '',
+        city: '',
+        street: '',
+        phone: '',
         password: '',
-        passwordVer: ''
+        passwordVer: '',
+        reCaptcha: false
     }
 
     const schema = Yup.object({
         email: Yup.string().email(translate.reqEmailMsg).required(translate.requiredMsg),
         firstName: Yup.string().required(translate.requiredMsg),
         lastName: Yup.string().required(translate.requiredMsg),
+        zeout: Yup.number().min(9).positive().integer(),
+        country: Yup.string().max(100),
+        city: Yup.string().max(100),
+        street: Yup.string().max(100),
+        phone: Yup.string().max(20),
         password: Yup.string().min(8, translate.passLengthMsg).matches(
             //eslint-disable-next-line
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
             translate.passValidMsg).required(translate.requiredMsg),
-        passwordVer: Yup.string().oneOf([Yup.ref('password'), null], translate.passwordsVerMsg).required(translate.requiredMsg)
+        passwordVer: Yup.string().oneOf([Yup.ref('password'), null], translate.passwordsVerMsg).required(translate.requiredMsg),
+        ReCAPTCHA: Yup.boolean().oneOf([true]).required(translate.reCaptchaMsg)
     });
 
-    const Fields = ({isSubmitting }) => {
+    const Fields = ({ isSubmitting, setFieldValue, submitRes }) => {
         return (
             <>
                 <InputTextField
@@ -57,6 +69,41 @@ export function SignupForm({ formSubmit, message }) {
                     disabled={isSubmitting}
                 />
                 <InputTextField
+                    label={`תעודת זהות:`}
+                    name="zeout"
+                    type='tel'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`מדינה:`}
+                    name="country"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`עיר:`}
+                    name="city"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`כתובת:`}
+                    name="street"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`טלפון:`}
+                    name="phone"
+                    type='tel'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
                     label={`סיסמה:`}
                     name="password"
                     type='password'
@@ -67,6 +114,11 @@ export function SignupForm({ formSubmit, message }) {
                     name="passwordVer"
                     type='password'
                     disabled={isSubmitting}
+                />
+                <ReCAPTCHAField
+                    name="ReCAPTCHA"
+                    set={setFieldValue}
+                    show={submitRes === null && true}
                 />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                     <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ?

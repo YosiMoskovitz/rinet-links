@@ -1,9 +1,12 @@
 .header{
     padding-bottom: 1rem !important;
 }
+.btnDiv{
+    padding: 0.4rem 0 !important;
+}
 .btn{
-    padding: 0.4rem 2.5rem !important;
-    margin: 0 0.6rem;
+    padding: 0.4rem 1.5rem !important;
+
 }
 .editBtns{
     margin-left: 2rem;
@@ -17,6 +20,16 @@
     background-color: #cf1bb4 !important;
     border-color: #cf1bb4 !important;
 }
+.table{
+    height:80vh !important;
+}
+.thead{
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1 
+}
+
 .activeRow{
     background-color: rgb(253, 246, 232) !important;
 }

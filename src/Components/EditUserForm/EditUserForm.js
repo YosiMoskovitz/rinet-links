@@ -36,11 +36,21 @@ export function EditUserForm(props) {
     var initialValues = {
         firstName: user?.firstName ?? '',
         lastName: user?.lastName ?? '',
+        zeout: user?.zeout ?? '',
+        country: user?.country ?? '',
+        city: user?.city ?? '',
+        street: user?.street ?? '',
+        phone: user?.phone ?? '',
     }
 
     var schemaObj = {
         firstName: Yup.string().required(translate.requiredMsg),
-        lastName: Yup.string().required(translate.requiredMsg)
+        lastName: Yup.string().required(translate.requiredMsg),
+        zeout: Yup.string().min(9),
+        country: Yup.string(),
+        city: Yup.string(),
+        street: Yup.string(),
+        phone: Yup.string().max(20),
     }
 
 
@@ -84,6 +94,41 @@ export function EditUserForm(props) {
                     name="lastName"
                     disabled={isSubmitting}
                     placeholder="שם משפחה"
+                />
+                <InputTextField
+                    label={`תעודת זהות:`}
+                    name="zeout"
+                    type='tel'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`מדינה:`}
+                    name="country"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`עיר:`}
+                    name="city"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`כתובת:`}
+                    name="street"
+                    type='text'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
+                />
+                <InputTextField
+                    label={`טלפון:`}
+                    name="phone"
+                    type='tel'
+                    disabled={isSubmitting}
+                    placeholder={'אופציונלי'}
                 />
                 {isAdmin ?
                     <>

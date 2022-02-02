@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { Form } from 'react-bootstrap'
 import { ErrorModal } from '../ErrorModal';
 
-export const FormikForm = ({ initialValues, schema, Fields, formSubmit }) => {
+export const FormikForm = ({ initialValues, schema, Fields, formSubmit, afterSubmit }) => {
 
     const [submitRes, setSubmitRes] = useState(null);
     return (
@@ -18,6 +18,7 @@ export const FormikForm = ({ initialValues, schema, Fields, formSubmit }) => {
                         formSubmit(values).then((result) => {
                             setSubmitRes(result)
                         }).then(() => {
+                            afterSubmit && afterSubmit();
                             setSubmitting(false);
                         })
                     }

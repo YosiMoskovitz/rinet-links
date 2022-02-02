@@ -2,6 +2,9 @@ import React from 'react';
 import { useField } from 'formik';
 import { Form } from 'react-bootstrap'
 import translate from '../Utils/engToHeb.json';
+import ReCAPTCHA from "react-google-recaptcha";
+import { APIconfig } from '../../Config';
+import { VerifyRecaptchaReq } from '../../Api/LoginApi'
 
 export const InputTextField = ({ label, ...props }) => {
     const [field, meta] = useField(props);
@@ -24,7 +27,7 @@ export const InputTextField = ({ label, ...props }) => {
     )
 }
 
-export  const InputSelectField = ({label, array, ...props }) => {
+export const InputSelectField = ({ label, array, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <Form.Group className="mb-3" controlId="formGridState">
@@ -51,3 +54,37 @@ export  const InputSelectField = ({label, array, ...props }) => {
         </Form.Group>
     );
 };
+
+export const ReCAPTCHAField = ({set, show, ...props }) => {
+    const [field, meta] = useField(props);
+
+    const handleReCaptchaChange = async (value) => {
+        const res = await VerifyRecaptchaReq(value);
+        if (res.status === 200) set('ReCAPTCHA', true, { shouldValidate: true })
+    }
+
+    if(show) {
+        return (
+            <Form.Group className="mb-3">            
+                <ReCAPTCHA
+                    className="mb-3"
+                    sitekey={APIconfig.reCaptchaSiteKey}
+                    onChange={handleReCaptchaChange}
+                />
+                <Form.Control
+                    type="hidden"
+                    isInvalid={!!meta.error}
+                    {...field} {...props}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {meta.error}
+                </Form.Control.Feedback>
+            </Form.Group>
+        )
+    }
+
+    return (
+      <></>
+    )
+}
+

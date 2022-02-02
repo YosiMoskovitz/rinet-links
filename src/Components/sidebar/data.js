@@ -1,6 +1,6 @@
 import React from 'react'
 import HomeIcon from '@mui/icons-material/Home';
-import SettingsIcon from '@mui/icons-material/Settings';
+import TocIcon from '@mui/icons-material/Toc';
 import EditIcon from '@mui/icons-material/Edit';
 import PeopleIcon from '@mui/icons-material/People';
 // import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -12,9 +12,9 @@ export const data = [
         link: '/'
     },
     {
-        title: 'ניהול',
-        icon: <SettingsIcon />,
-        link: 'manage'
+        title: 'דוחות',
+        icon: <TocIcon />,
+        link: 'reports'
     },
     {
         title: 'ניהול קישורים',

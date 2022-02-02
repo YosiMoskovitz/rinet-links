@@ -10,6 +10,13 @@
 .linkStyle{
     cursor: pointer;
 }
-.sp{
-    font-weight: 500;
+.card{
+    margin-right: 20% !important;
+    width: 40%;
+    font-family: Assistant,Arial;
+    color: #808080;
 }
+.formFields{
+    padding: 5% !important;
+}
+

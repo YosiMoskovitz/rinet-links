@@ -43,6 +43,11 @@ export function UsersTable() {
                 <td>{item.email}</td>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
+                <td>{item.zeout}</td>
+                <td>{item.country}</td>
+                <td>{item.city}</td>
+                <td>{item.street}</td>
+                <td>{item.phone}</td>
                 <td>{getTitle(item, 'role', roles)}</td>
                 <td>{getTitle(item, 'status', status)}</td>
                 <td>{item.createdVia}</td>

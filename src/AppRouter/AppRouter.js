@@ -15,15 +15,16 @@ import { Layout, ManegeBox, LoginContainer } from '../Components/layout'
 import { Login } from '../Pages/Login'
 import NotFound from '../Pages/NotFound'
 import { Home } from '../Pages/Home';
-import { Manage } from '../Pages/Manage';
-import { Account } from '../Pages/Account/';
+import { Reports } from '../Pages/Reports';
+import { Account } from '../Pages/Account';
+import { Donate } from '../Pages/Donate';
 import { ResetPass } from '../Pages/ResetPass';
 import { NewPass } from '../Pages/NewPass';
 import { Signup } from '../Pages/Signup'
 import { AccountVeri } from '../Pages/AccountVeri'
 import { LinksTable } from '../Components/LinksTable';
 import { UsersTable } from '../Components/UsersTable';
-import { AddLink } from '../Pages/Manage/AddLink';
+
 
 var userType = null;
 
@@ -41,7 +42,7 @@ const PrivateRoutes = () => {
 
 const AxiosResListener = (props) => {
   AxiosInterceptors();
-  return <></>;
+  return <Outlet />;
 }
 
 const ManageRoutes = () => {
@@ -80,9 +81,9 @@ export function AppRouter() {
             <Route element={<LinksCtxProvider />}>
               <Route index element={<Home />} />
               <Route path='account' element={<Account />} />
+              <Route path='donate' element={<Donate />} />
               <Route element={<ManageRoutes />}>
-                <Route path="/manage" element={<Manage />} />
-                <Route path='/manage/addlink' element={<AddLink />} />
+                <Route path="/reports" element={<Reports />} />
                 <Route path='links' element={<LinksTable />} />
                 <Route path='users' element={<UsersTable />} />
               </Route>

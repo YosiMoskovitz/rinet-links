@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Table, Pagination, Form, Col, Row, Button, Modal, ModalTitle, CloseButton, Alert } from 'react-bootstrap';
+import { Table, Pagination, Form, Row, Col, Button, Modal, ModalTitle, CloseButton, Alert } from 'react-bootstrap';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -60,7 +60,7 @@ export function TablePro({ data, titles, type, refreshBtn, TdArr, funcsObj, Mane
     const sorting = (col) => {
         if (order === 'ASC') {
             const sorted = filteredData.sort((a, b) =>
-            a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1);
+                a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1);
             filteredData = sorted;
             setOrder('DSC')
             return
@@ -115,7 +115,7 @@ export function TablePro({ data, titles, type, refreshBtn, TdArr, funcsObj, Mane
                     </div>
                     :
                     <Alert variant={deletedRes.type === 'success' || deletedRes.status === 'OK' ? 'success' : 'danger'}>
-                        {deletedRes.type === 'success' || deletedRes.status === 'OK'? <CheckCircleIcon color='success' fontSize='large' />
+                        {deletedRes.type === 'success' || deletedRes.status === 'OK' ? <CheckCircleIcon color='success' fontSize='large' />
                             : <DangerousIcon color='danger' fontSize='large' />} {deletedRes.message ?? deletedRes.data}
                     </Alert>}
             </div>
@@ -175,11 +175,12 @@ export function TablePro({ data, titles, type, refreshBtn, TdArr, funcsObj, Mane
             <OutClicker onClickOutside={() => { !show && setActiveRow(null) }}>
                 <div className={styles.header}>
                     <Row className="align-items-center">
-                        <Col xs="auto" className="my-1">
-                            <Form.Label>כמות שורות בדף</Form.Label>
+                        <Col xs="auto" className="ms-auto cmd-3">
+                            <Form.Control type="search" placeholder="חיפוש..." onChange={(e) => setSearchTerm(e.target.value)} />
                         </Col>
-                        <Col xs="auto" className="my-1">
-                            <Form.Select className="ms-1" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>
+                        <Col xs="auto">
+                            <Form.Label style={{ fontSize: "12px" }}>{'כמות שורות בדף'}</Form.Label>
+                            <Form.Select size="sm" className="ms-1" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>
                                 <option default value="0">הכל</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
@@ -187,47 +188,56 @@ export function TablePro({ data, titles, type, refreshBtn, TdArr, funcsObj, Mane
                                 <option value="200">200</option>
                             </Form.Select>
                         </Col>
-                        <Col xs="auto" className={`col-auto ${styles.editBtns}`}>
+                    </Row>
+                </div>
+                <Row>
+                    <Col sm={1}>
+                        <Row xs="auto" className={`${styles.btnDiv}`}>
                             <Button className={`${styles.btn} ${styles.Addbtn} shadow-none`}
                                 onClick={handelAddBtnClick}>
                                 <AddIcon fontSize='small' />
                                 {'הוסף'}
                             </Button>
+                        </Row>
+                        <Row xs="auto" className={styles.btnDiv} disabled={activeRow === null}>
                             <Button variant="secondary" className={styles.btn} disabled={activeRow === null}
                                 onClick={handelEditBtnClick}>
                                 <EditIcon fontSize='small' />
                                 {'ערוך'}
                             </Button>
+                        </Row>
+                        <Row xs="auto" className={styles.btnDiv} disabled={activeRow === null}>
                             <Button variant="danger" className={styles.btn} disabled={activeRow === null}
                                 onClick={handelDeleteBtnClick}>
                                 <DeleteIcon fontSize='small' />
                                 {'מחק'}
                             </Button>
-                        </Col>
-                        <Col xs="auto" className="me-auto col-md-3">
-                            <Form.Control type="search" placeholder="חיפוש..." onChange={(e) => setSearchTerm(e.target.value)} />
-                        </Col>
-                    </Row>
-                </div>
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            {titles.map((title) => {
-                                return <th key={title} onClick={() => { sorting(title); handelColumClick(title) }} className={orderStyle(title)}>{translate[title]}</th>
-                            })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentItems.map((item, i) => {
-                            return (
-                                <tr key={i} onClick={() => { handelRowClick(item.id, i) }} className={activeRow === i ? `${styles.activeRow}` : null}>
-                                    <td>{i + indexOfFirstItem + 1}</td>
-                                    <TdArr item={item} />
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </Table>
+                        </Row>
+                    </Col>
+                    <Col sm={11}>
+                        <div className={`table-responsive ${styles.table}`}>
+                            <Table striped bordered hover size="sm">
+                                <thead className={`table-dark ${styles.thead}`}>
+                                    <tr>
+                                        {titles.map((title) => {
+                                            return <th key={title} onClick={() => { sorting(title); handelColumClick(title) }} className={orderStyle(title)}>{translate[title]}</th>
+                                        })}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentItems.map((item, i) => {
+                                        return (
+                                            <tr style={{ whiteSpace: "nowrap "}} key={i} onClick={() => { handelRowClick(item.id, i) }} className={activeRow === i ? `${styles.activeRow}` : null}>
+                                                <td>{i + indexOfFirstItem + 1}</td>
+                                                <TdArr item={item} />
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </Col>
+                </Row>
                 {itemsPerPage !== '0' &&
                     <Pagination className="justify-content-center">
                         {currentPage > 1 && <Pagination.First onClick={handelFirstClick} className='shadow-none' />}

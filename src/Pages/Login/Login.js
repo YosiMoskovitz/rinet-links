@@ -25,9 +25,7 @@ export function Login() {
     }
 
     return (
-        <section>
             <LoginForm formSubmit={LoginSubmit} message={msg} />
-        </section>
     )
 
 }

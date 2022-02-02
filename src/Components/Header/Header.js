@@ -6,17 +6,20 @@ import { LogOutReq } from '../../Api/LoginApi';
 import 'bootstrap/dist/css/bootstrap.css';
 //icon for user pic
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDonate } from '@fortawesome/free-solid-svg-icons'
 import styles from './Header.module.css'
 import { InfoDivs } from '../InfoDivs'
 
-export function Header () {
+export function Header() {
     const navigate = useNavigate();
     const LoginCtx = useContext(LoginContext);
-	const { user } = LoginCtx;
+    const { user } = LoginCtx;
 
     const handleLogout = () => {
-        LogOutReq().then((res)=> {
-            if (res.status === 'OK'){
+        LogOutReq().then((res) => {
+            if (res.status === 'OK') {
                 LoginCtx.setStatus(false);
                 LoginCtx.setUser({});
                 navigate('/login', { replace: true })
@@ -25,24 +28,32 @@ export function Header () {
 
             }
         })
-	};
-    
+    };
+
+    const handelDonate = () => {
+        navigate('/donate')
+    }
+
     return (
         <Navbar variant="light" className={styles.bg} expand="md">
             <Container fluid>
-                <Navbar.Brand href="#home">ריינט - קישורים להורדה</Navbar.Brand>
+                <Navbar.Brand onClick={() => navigate('/')}>ריינט - קישורים להורדה</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <InfoDivs />
                 <Navbar.Collapse>
-                    <Nav className={`me-auto my-2 my-lg-0 ${styles.navbar}`} navbarScroll>
+                    <Nav className={`me-auto`} navbarScroll>
+                    <Nav.Item>
+                    <div className="mt-2 ml-2">
+                        <Button variant="outline-secondary" size="sm" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
+                    </div>
+                    </Nav.Item>
                         <NavDropdown
-                            id="nav-dropdown-dark-example"
                             title={<AccountCircleIcon />}
                             menuVariant="light"
                         >
                             <div className={styles.dropdownTextAlign}>
-                            <NavDropdown.Item disabled>{user.firstName + " " + user.lastName + " "}</NavDropdown.Item>
-                            <NavDropdown.Divider />
+                                <NavDropdown.Item disabled>{user.firstName + " " + user.lastName + " "}</NavDropdown.Item>
+                                <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={() => navigate('/account')}>החשבון שלי</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>התנתק</NavDropdown.Item>
                             </div>

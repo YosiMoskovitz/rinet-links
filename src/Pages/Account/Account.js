@@ -12,7 +12,7 @@ import { getFormattedDate, getFormattedTime } from '../../Components/Utils';
 
 export const Account = () => {
     const userCTX = useContext(LoginContext);
-    
+
     const [showModal, setShowModal] = useState(false);
     const [modalType, setModalType] = useState('');
     const [modalTitle, setModalTitle] = useState('');
@@ -47,7 +47,6 @@ export const Account = () => {
                 <Card.Body>
                     <Card.Title>{userCTX.user.firstName + ' ' + userCTX.user.lastName}</Card.Title>
                     <Card.Subtitle style={{ fontSize: '14px' }} className="mb-2 text-muted">{userCTX.user.email}</Card.Subtitle>
-                    {/* <Card.Text></Card.Text> */}
                     <ListGroup variant="flush">
                         <ListGroup.Item><strong className="ml-2">סוג חשבון:</strong>{translate[userCTX.user.role.title]}</ListGroup.Item>
                         <ListGroup.Item><strong className="ml-2">סטטוס:</strong>{translate[userCTX.user.status.title]}</ListGroup.Item>
@@ -57,7 +56,26 @@ export const Account = () => {
                     </ListGroup>
                     <Card.Link onClick={handelChangeDetails} className={`col ${styles.linkStyle}`}>שנה פרטים אישיים</Card.Link>
                     <Card.Link onClick={handelChangePass} className={styles.linkStyle}>שנה סיסמה</Card.Link>
-                    <div className="d-grid gap-2 mt-4">
+                    <Card.Footer className={'mt-3'}>
+                        <p><strong>תרומות:</strong></p>
+                        {userCTX.user.donations.length <1 || userCTX.user.donations === '' ? <>{'לא נמצאו נתונים'}</>
+                        : <ListGroup>
+                            {userCTX.user.donations.map((donation) => {
+                                return (
+                                    <ListGroup.Item key={donation.id}>
+                                        <span className={styles.sp}>{'בתאריך '}</span>
+                                        {donation.TransactionTime}
+                                        <span className={styles.sp}>{' סך '}</span>
+                                        {donation.Amount +' '}
+                                        {donation.Currency === '1' ? 'ש"ח' : '$'}
+                                        <span className={styles.sp}>{' מכרטיס '}</span>
+                                        {donation.LastNum + '****'}
+                                        </ListGroup.Item>
+                                )
+                            })}
+                        </ListGroup>}
+                    </Card.Footer>
+                    <div className="d-grid gap-2 mt-4 mb-4">
                         <Button variant="outline-danger" onClick={handelDelete}>{'מחק את החשבון שלי'}</Button>
                     </div>
                 </Card.Body>

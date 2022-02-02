@@ -21,6 +21,11 @@ export const LoginReq = async (user) => {
     return result;
 }
 
+export const VerifyRecaptchaReq = async (token) => {
+    var result = await Axios.post(`${APIconfig.url}/users/recaptcha-verification`, token)
+    return result;
+}
+
 export const SignupReq = async (user) => {
     var result = await LoginAxios.post(`/users/signup`, user)
     return result;
