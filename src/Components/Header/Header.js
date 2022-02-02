@@ -37,19 +37,23 @@ export function Header() {
     return (
         <Navbar variant="light" className={styles.bg} expand="md">
             <Container fluid>
-                <Navbar.Brand onClick={() => navigate('/')}>ריינט - קישורים להורדה</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Brand className={styles.responsiveHead} onClick={() => navigate('/')}><span className={styles.responsiveTitle}>ריינט - קישורים להורדה</span></Navbar.Brand>
                 <InfoDivs />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse>
                     <Nav className={`me-auto`} navbarScroll>
-                    <Nav.Item>
-                    <div className="mt-2 ml-2">
-                        <Button variant="outline-secondary" size="sm" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
-                    </div>
-                    </Nav.Item>
+                        <Nav.Item>
+                            <div className={`mt-2 ml-2 ${styles.regularDonate}`}>
+                                <Button variant="outline-secondary" size="sm" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
+                            </div>
+                            <div className={`d-grid gap-2 ${styles.responsiveDonate}`} visible={false}>
+                            <Button variant="outline-secondary" size="md" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
+                            </div>
+                        </Nav.Item>
                         <NavDropdown
                             title={<AccountCircleIcon />}
                             menuVariant="light"
+                            className={styles.responsiveNavDrop}
                         >
                             <div className={styles.dropdownTextAlign}>
                                 <NavDropdown.Item disabled>{user.firstName + " " + user.lastName + " "}</NavDropdown.Item>

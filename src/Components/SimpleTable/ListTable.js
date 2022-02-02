@@ -4,6 +4,7 @@ import { Loading } from '../../Pages/Loading';
 
 
 import { DataGrid } from '@mui/x-data-grid';
+import TablePagination from '@mui/material/TablePagination';
 import { getFormattedDate } from '../../Components/Utils';
 
 function BasicTable() {

@@ -13,3 +13,18 @@
 .sp{
     font-weight: 500;
 }
+
+@media screen and (max-width: 414px) {
+    .container{
+        margin: 1rem;
+        height: fit-content;
+        padding: 0.5rem;
+        width: 100;
+        border:1px solid rgb(2, 56, 43);
+        border-radius: 10px;
+        background-color: rgb(240, 237, 233);
+    }
+    strong{
+        display: flex;
+    }
+}

@@ -4,3 +4,15 @@
 .col{
    padding: 0 !important;
 }
+
+@media screen and (max-width: 414px) {
+   .col{
+      padding: 0 !important;
+   }
+   .sidebar{
+      width: 25% !important;
+   }
+   .header{
+      width: 75% !important;
+   }
+}

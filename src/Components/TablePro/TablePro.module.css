@@ -55,3 +55,26 @@
     padding: 1% 12% !important;
 }
 
+@media screen and (max-width: 414px){
+    .search{
+        width: 95% !important;
+        margin: 0 0.5rem;
+    }
+    .btnDiv{
+        display: inline-block !important;
+        margin: 0.5rem !important;
+        padding: 0.4rem 0 !important;
+    }
+    .maxRows{
+        display: flex !important;
+        width: fit-content !important;
+        margin: 1rem 0.5rem 0 !important;
+        height: 2rem;
+    }
+    .maxRowsTitle{
+        width: fit-content;
+        white-space: nowrap;
+        margin: 0.4rem;
+    }
+}
+

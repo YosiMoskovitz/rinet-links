@@ -43,3 +43,41 @@
 ul {
     margin-top: 0;
   }
+
+
+@media screen and (max-width: 414px) {
+    .sidebar{
+        height: fit-content;
+        margin: 0;
+        /* width: 10%; */
+    }
+    .sidebarList{
+        height: auto;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .sidebarList .row{
+        width: 6rem;
+        height: 50px;
+        list-style-type: none;
+        margin: 0;
+        display: inline-flex;
+        flex-direction: column;
+        color:white;
+        justify-content: center;
+        align-items: center;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    }
+    .row #icon{
+        flex: none;
+        padding-top: 2rem;
+        display: flexbox;
+        place-items: center;
+    }
+    .row #title{
+        flex: none;
+        visibility: hidden;
+    }
+    
+}

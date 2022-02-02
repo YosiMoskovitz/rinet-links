@@ -175,11 +175,11 @@ export function TablePro({ data, titles, type, refreshBtn, TdArr, funcsObj, Mane
             <OutClicker onClickOutside={() => { !show && setActiveRow(null) }}>
                 <div className={styles.header}>
                     <Row className="align-items-center">
-                        <Col xs="auto" className="ms-auto cmd-3">
+                        <Col xs="auto" className={`ms-auto cmd-3 ${styles.search}`}>
                             <Form.Control type="search" placeholder="חיפוש..." onChange={(e) => setSearchTerm(e.target.value)} />
                         </Col>
-                        <Col xs="auto">
-                            <Form.Label style={{ fontSize: "12px" }}>{'כמות שורות בדף'}</Form.Label>
+                        <Col xs="auto" className={styles.maxRows}>
+                            <Form.Label style={{ fontSize: "12px" }} className={styles.maxRowsTitle}>{'כמות שורות בדף'}</Form.Label>
                             <Form.Select size="sm" className="ms-1" onChange={(e) => { setItemsPerPage(e.target.value); setCurrentPage(1) }}>
                                 <option default value="0">הכל</option>
                                 <option value="20">20</option>

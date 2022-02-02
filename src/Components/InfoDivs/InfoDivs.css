@@ -27,4 +27,15 @@
    transition: opacity 500ms, transform 500ms;
  }
 
+ @media screen and (max-width: 414px) {
+  .slider-container {
+    position: auto;
+    align-items: center;
+    left : unset;
+    top: 3rem;
+    right: 6rem;
+    font-size: 12px; 
+  }
+ }
+
  
