@@ -43,6 +43,7 @@ export function Upload({ setFormikVal }) {
                 if (err.response.handler) {
                     setErrorHandler(err.response.handler)
                 }
+                else setErrorHandler(err.response)
             });
     };
     return (
@@ -51,7 +52,7 @@ export function Upload({ setFormikVal }) {
             {!uploadSuccess ?
                 isSubmitting ?
                     <div>
-                        <p className="fw-bold">{uploadProgress !== 100 ? `מעלה קובץ %${uploadProgress}` : 'שומר קובץ בשרת'}</p>
+                        <p className="fw-bold">{uploadProgress !== 100 ? `מעלה קובץ ${uploadProgress}%` : 'שומר קובץ בשרת'}</p>
                         <ProgressBar animated now={uploadProgress} variant='success' />
                     </div>
                     : <div className="mb-3 row">

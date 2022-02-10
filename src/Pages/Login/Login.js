@@ -17,7 +17,10 @@ export function Login() {
         if (res.status === 'OK') {
             LoginCtx.setStatus(true);
             LoginCtx.setUser(res.data.user);
-            navigate('/', { replace: true })
+            setMsg({status : 'OK', data: 'Successfully Logged In!'});
+            setTimeout(() => {
+                navigate('/', { replace: true })
+            }, 1500)
         }
         if (res.status === 'ERROR') {
             setMsg(res.data)

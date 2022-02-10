@@ -18,9 +18,9 @@ export function Layout() {
   return (
     <Row>
       {isAdmin ?
-      <Col xl={2} xs={12} className={`${classes.col}`}><Sidebar /></Col>
+      <Col md={2} xs={12} className={`${classes.col}`}><Sidebar /></Col>
     : null}
-        <Col xl={isAdmin ? 10 : 12} xs={12} className={`${classes.col}`}>
+        <Col md={isAdmin ? 10 : 12} xs={12} className={`${classes.col}`}>
         <Header />
         <Outlet />
         </Col>

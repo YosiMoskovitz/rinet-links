@@ -46,7 +46,7 @@ export function Header() {
                             <div className={`mt-2 ml-2 ${styles.regularDonate}`}>
                                 <Button variant="outline-secondary" size="sm" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
                             </div>
-                            <div className={`d-grid gap-2 ${styles.responsiveDonate}`} visible={false}>
+                            <div className={`d-grid gap-2 ${styles.responsiveDonate}`} visible={'hidden'}>
                             <Button variant="outline-secondary" size="md" onClick={handelDonate}>{<FontAwesomeIcon icon={faDonate} />} {'תרום '}</Button>
                             </div>
                         </Nav.Item>

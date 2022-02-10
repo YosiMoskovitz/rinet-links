@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios'
 
-import LoginContext from '../../store/Login-context'
+import LoginContext from '../../store/Login-context';
 import translate from '../../Components/Utils/engToHeb.json';
 
 const SetupInterceptors = () => {
     const LoginCtx = useContext(LoginContext);
     const navigate = useNavigate()
+
 
     const redirectToLogin = () => {
         window.location.pathname !== '/login' && navigate('/login', { replace: true })
@@ -58,7 +59,7 @@ const SetupInterceptors = () => {
                     then: redirectToLogin
                 };
                 LoginCtx.setStatus(false);
-                LoginCtx.setUser({})
+                LoginCtx.setUser({});
                 break;
             case 409:
                 handler = {

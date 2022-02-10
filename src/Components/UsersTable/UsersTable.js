@@ -32,7 +32,7 @@ export function UsersTable() {
                 setRoles(rolesRes.data.roles)
                 setStatus(statusesRes.data.statuses)
             }))
-            .catch(error => console.log(error))
+            .catch(error => console.log('error.message'))
             .finally(()=> setIsLoading(false));
     }, [refresh])
 

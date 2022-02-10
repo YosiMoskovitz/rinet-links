@@ -1,4 +1,4 @@
-import { React, useContext, useState, useRef, memo } from 'react'
+import { React, useContext, useState, useRef } from 'react'
 import { Card } from 'react-bootstrap';
 import styles from './Donate.module.css';
 import { Formik } from 'formik'
@@ -11,7 +11,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import { APIconfig } from '../../Config';
 
-import { registerDonation } from '../../Api/DonationsApi'
+// import { registerDonation } from '../../Api/DonationsApi'
 
 
 
@@ -22,7 +22,8 @@ export const Donate = () => {
 
     const container = useRef();
 
-    const NedarimIframe = memo(({ height }) => (
+
+    const NedarimIframe = () => (
         <iframe
             id='NedarimFrame'
             title="NedarimFrame"
@@ -30,9 +31,10 @@ export const Donate = () => {
             ref={container}
             onLoad={() => nedarimComms({ 'Name': 'GetHeight' })}
             width={'100%'}
-            height={height}
+            height={iframeHight}
         />
-    ));
+    );
+
 
     const paymentTypes = [{ id: 'Ragil', title: 'normal' }, { id: 'HK', title: "HK" }]
 
@@ -57,7 +59,7 @@ export const Donate = () => {
         window.onmessage = (event) => {
             // channel.port1.close();
             var result = { type: '', message: '' }
-            result.message = event.data?.Value?.Message
+            result.message = event.data?.Value?.Message;
             if (event.data.Value?.Status === 'Error') {
                 result.type = 'error';
                 rej(result);
@@ -65,8 +67,9 @@ export const Donate = () => {
                 result.type = 'ok';
                 switch (event.data.Name) {
                     case 'Height':
-                        const resHight = (parseInt(event.data.Value) + 15) + "px"
-                        iframeHight !== resHight && setIframeHight(resHight);
+                        const resHight = (parseInt(event.data.Value) + 15) + "px";
+                        console.log(iframeHight)
+                        container.current.height !== resHight && setIframeHight(resHight);
                         res(result);
                         break;
                     case 'TransactionResponse':
@@ -75,7 +78,7 @@ export const Donate = () => {
                     default:
                         break;
                 }
-                
+
             }
         };
 
@@ -111,13 +114,13 @@ export const Donate = () => {
                     type='text'
                     disabled={isSubmitting}
                 />
-                <NedarimIframe height={iframeHight} />
+                <NedarimIframe />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                     <Button variant="outline-secondary" type="submit" disabled={isSubmitting}>{isSubmitting ?
                         <div>אנא המתן... <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /></div>
                         : "בצע חיוב"}</Button>
-                    {ResMessage && ResMessage.Status === 'Error' ?
-                        <Alert variant={'danger'} style={{ marginTop: 20 }}>{<DangerousIcon color='danger' fontSize='large' />} {ResMessage.Message}</Alert> : ResMessage && ResMessage.Status !== 'Error' ?
+                    {ResMessage && ResMessage.type === 'error' ?
+                        <Alert variant={'danger'} style={{ marginTop: 20 }}>{<DangerousIcon color='danger' fontSize='large' />} {ResMessage.message}</Alert> : ResMessage && ResMessage.type !== 'error' ?
                             <Alert variant={'success'} style={{ marginTop: 20 }}>{<CheckCircleIcon color='success' fontSize='large' />} {'החיוב בוצע בהצלחה'}</Alert> : null}
                 </div>
             </>
@@ -151,29 +154,24 @@ export const Donate = () => {
                 'Param2': '',
                 'ForceUpdateMatching': '0', //מיועד לקמפיין אם מעוניינים שהמידע יידחף ליעד, למרות שזה לא נהוג באייפרם
 
-                'CallBack': '',
+                'CallBack': `${APIconfig.url}/donationes/new-donation/${userCTX.user.id}`,
                 // 'Tokef': document.getElementById('Tokef').value //אם אתם מנהלים את התוקף בדף שלכם (מיועד למי שרוצה להפריד בין חודש לשנה ורוצה לעצב מותאם אישית)
             }
-        }).then(async (res)=> {
-            return await registerDonation(userCTX.user.id, res);
-        }).then((res)=> {
+        })
+        // .then(async (res) => {
+        //     return await registerDonation(userCTX.user.id, res);
+        // })
+        .then((res) => {
             return res;
         });
-        return re;    
+        return re;
     }
-
 
     return (
         <div className={styles.container}>
             <Card className={`${styles.card}`}>
                 <Card.Header>{'תרומה להחזקת המערכת'}</Card.Header>
                 <Card.Body>
-                    {/* <Card.Title>{userCTX.user.firstName + ' ' + userCTX.user.lastName}</Card.Title>
-                    <Card.Subtitle style={{ fontSize: '14px' }} className="mb-2 text-muted">{userCTX.user.email}</Card.Subtitle> */}
-                    {/* <Card.Text></Card.Text> */}
-                    {/* <ListGroup variant="flush">
-                        <ListGroup.Item><strong className="ml-2">סוג חשבון:</strong>{translate[userCTX.user.role.title]}</ListGroup.Item>
-                    </ListGroup> */}
                     <Formik
                         enableReinitialize={true}
                         initialValues={initialValues}
@@ -183,8 +181,11 @@ export const Donate = () => {
                             handelDonateClick(values).then((result) => {
                                 setSubmitting(false);
                                 setResMessage(result);
+                            }).catch((error) => {
+                                setSubmitting(false);
+                                setResMessage(error);
                             });
-                            
+
                         }}
                         validateOnBlur={false}
                     >
@@ -198,6 +199,7 @@ export const Donate = () => {
             </Card>
         </div >
     )
+
 }
 
 

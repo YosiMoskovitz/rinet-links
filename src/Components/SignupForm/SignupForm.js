@@ -50,71 +50,93 @@ export function SignupForm({ formSubmit, message }) {
     const Fields = ({ isSubmitting, setFieldValue, submitRes }) => {
         return (
             <>
-                <InputTextField
-                    label={`כתובת דוא"ל:`}
-                    type='email'
-                    name="email"
-                    disabled={isSubmitting}
-                />
-                <InputTextField
-                    label={`שם פרטי:`}
-                    name="firstName"
-                    type='text'
-                    disabled={isSubmitting}
-                />
-                <InputTextField
-                    label={`שם משפחה:`}
-                    name="lastName"
-                    type='text'
-                    disabled={isSubmitting}
-                />
-                <InputTextField
-                    label={`תעודת זהות:`}
-                    name="zeout"
-                    type='tel'
-                    disabled={isSubmitting}
-                    placeholder={'אופציונלי'}
-                />
-                <InputTextField
-                    label={`מדינה:`}
-                    name="country"
-                    type='text'
-                    disabled={isSubmitting}
-                    placeholder={'אופציונלי'}
-                />
-                <InputTextField
-                    label={`עיר:`}
-                    name="city"
-                    type='text'
-                    disabled={isSubmitting}
-                    placeholder={'אופציונלי'}
-                />
-                <InputTextField
-                    label={`כתובת:`}
-                    name="street"
-                    type='text'
-                    disabled={isSubmitting}
-                    placeholder={'אופציונלי'}
-                />
-                <InputTextField
-                    label={`טלפון:`}
-                    name="phone"
-                    type='tel'
-                    disabled={isSubmitting}
-                    placeholder={'אופציונלי'}
-                />
-                <InputTextField
-                    label={`סיסמה:`}
-                    name="password"
-                    type='password'
-                    disabled={isSubmitting}
-                />
-                <InputTextField
-                    label={`הקלד שוב את הסיסמה:`}
-                    name="passwordVer"
-                    type='password'
-                    disabled={isSubmitting}
-                />
+                <Row>
+                    <Col>
+                        <InputTextField
+                            label={`שם פרטי:`}
+                            name="firstName"
+                            type='text'
+                            disabled={isSubmitting}
+                        />
+                    </Col>
+                    <Col>
+                        <InputTextField
+                            label={`שם משפחה:`}
+                            name="lastName"
+                            type='text'
+                            disabled={isSubmitting}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <InputTextField
+                            label={`סיסמה:`}
+                            name="password"
+                            type='password'
+                            disabled={isSubmitting}
+                        />
+                    </Col>
+                    <Col>
+                        <InputTextField
+                            label={`הקלד שוב את הסיסמה:`}
+                            name="passwordVer"
+                            type='password'
+                            disabled={isSubmitting}
+                        />
+                    </Col>
+                </Row>
+                <Row><span className="text-primary mb-2 mt-2" >פרטים אופציונליים - לא חובה:</span></Row>
+                <div >
+                    <Row>
+                        <InputTextField
+                            label={`תעודת זהות:`}
+                            name="zeout"
+                            type='tel'
+                            disabled={isSubmitting}
+                            size="sm"
+                        />
+                    </Row>
+                    <Row>
+                        <Col>
+                            <InputTextField
+                                label={`מדינה:`}
+                                name="country"
+                                type='text'
+                                disabled={isSubmitting}
+                                size="sm"
+                            />
+                        </Col>
+                        <Col>
+                            <InputTextField
+                                label={`עיר:`}
+                                name="city"
+                                type='text'
+                                disabled={isSubmitting}
+                                size="sm"
+                            />
+                        </Col>
+                    </Row>
+                    <InputTextField
+                        label={`כתובת:`}
+                        name="street"
+                        type='text'
+                        disabled={isSubmitting}
+                        size="sm"
+                    />
+                    <InputTextField
+                        label={`טלפון:`}
+                        name="phone"
+                        type='tel'
+                        disabled={isSubmitting}
+                        size="sm"
+                    />
+                </div>
+
+
+
+
+
                 <ReCAPTCHAField
                     name="ReCAPTCHA"
                     set={setFieldValue}

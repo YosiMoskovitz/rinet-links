@@ -83,7 +83,7 @@ export function AppRouter() {
               <Route path='account' element={<Account />} />
               <Route path='donate' element={<Donate />} />
               <Route element={<ManageRoutes />}>
-                <Route path="/reports" element={<Reports />} />
+                <Route path="reports" element={<Reports />} />
                 <Route path='links' element={<LinksTable />} />
                 <Route path='users' element={<UsersTable />} />
               </Route>

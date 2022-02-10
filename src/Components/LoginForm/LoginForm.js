@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormikForm, InputTextField } from '../FormikForm';
 import { Row, Col, Button, Alert, Spinner } from 'react-bootstrap'
 import * as Yup from 'yup';
-// import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 
 import translate from '../Utils/engToHeb.json'
@@ -66,18 +66,28 @@ export function LoginForm({ formSubmit, message }) {
 
     return (
         <div className={styles.felids}>
-            <h3 className={styles.title}>כניסה למערכת</h3>
-            <FormikForm
-                initialValues={initialValues}
-                schema={schema}
-                formSubmit={formSubmit}
-                Fields={Fields}
-            >
-            </FormikForm>
-            {message && message !== undefined ?
-                <Alert variant="danger" style={{ marginTop: 20 }}>{message}</Alert>
-                : null
-            }
+            {message && message.data !== undefined && message.status === 'OK' ?
+                <div>
+                    <Alert variant={'success'} style={{ marginTop: 20 }} >
+                        <div className='row align-items-center mb-2'>
+                            <CheckCircleIcon color='success' fontSize='large' className='col' />
+                        </div>
+                        <div className='col text-center'>
+                            {message.data}
+                        </div>
+                    </Alert>
+                </div>
+                :
+            <div>
+                <h3 className={styles.title}>כניסה למערכת</h3>
+                <FormikForm
+                    initialValues={initialValues}
+                    schema={schema}
+                    formSubmit={formSubmit}
+                    Fields={Fields}
+                >
+                </FormikForm>
+            </div>}
         </div>
     )
 }

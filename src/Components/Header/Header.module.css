@@ -12,6 +12,7 @@
 }
 .responsiveHead{
     height: initial;
+    cursor: pointer;
 }
 .responsiveDonate {
     position: absolute;

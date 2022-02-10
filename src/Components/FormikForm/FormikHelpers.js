@@ -10,7 +10,7 @@ export const InputTextField = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <Form.Group className="mb-3">
-            <Form.Label>{label}</Form.Label>
+            <Form.Label >{label}</Form.Label>
             <Form.Control
                 type="text"
                 isInvalid={!!meta.error}
