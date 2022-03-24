@@ -7,6 +7,7 @@ export function Signup() {
     const [msg, setMsg] = useState(undefined);
 
     const SignupSubmit = async (user) => {
+        console.log(user)
         const { email, firstName, lastName, password } = user;
         const res = await SignupReq({email, firstName, lastName, password});
         if (res.status === 'OK') {

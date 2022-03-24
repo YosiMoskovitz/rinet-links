@@ -17,7 +17,7 @@ export function Login() {
         if (res.status === 'OK') {
             LoginCtx.setStatus(true);
             LoginCtx.setUser(res.data.user);
-            setMsg({status : 'OK', data: 'Successfully Logged In!'});
+            setMsg({status : 'OK', data: 'כניסה בוצעה בהצלחה'});
             setTimeout(() => {
                 navigate('/', { replace: true })
             }, 1500)

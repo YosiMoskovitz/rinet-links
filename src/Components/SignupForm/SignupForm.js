@@ -87,7 +87,7 @@ export function SignupForm({ formSubmit, message }) {
                     </Col>
                 </Row>
                 <Row><span className="text-primary mb-2 mt-2" >פרטים אופציונליים - לא חובה:</span></Row>
-                <div >
+                <>
                     <Row>
                         <InputTextField
                             label={`תעודת זהות:`}
@@ -131,16 +131,11 @@ export function SignupForm({ formSubmit, message }) {
                         disabled={isSubmitting}
                         size="sm"
                     />
-                </div>
-
-
-
-
-
+                </>
                 <ReCAPTCHAField
                     name="ReCAPTCHA"
                     set={setFieldValue}
-                    show={submitRes === null && true}
+                    show={!initialValues.reCaptcha}
                 />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                     <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ?
@@ -155,6 +150,8 @@ export function SignupForm({ formSubmit, message }) {
             </>
         )
     }
+
+    console.log(initialValues.reCaptcha)
 
     return (
         <div className={styles.felids} style={{ marginTop: '10vh' }}>

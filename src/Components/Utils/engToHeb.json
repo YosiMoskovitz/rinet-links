@@ -64,5 +64,6 @@
     "street": "כתובת",
     "city": "עיר",
     "phone": "טלפון",
-    "reCaptchaMsg": "אתה רובוט?! 🤔"
+    "reCaptchaMsg": "אתה רובוט?! 🤔",
+    "Successfully Logged In": "כניסה בוצעה בהצלחה"
 }
