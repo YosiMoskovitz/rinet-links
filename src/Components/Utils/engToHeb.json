@@ -64,7 +64,5 @@
     "street": "כתובת",
     "city": "עיר",
     "phone": "טלפון",
-    "reCaptchaMsg": "אתה רובוט?! 🤔",
-    "normal": "רגיל",
-    "HK": "הוראת קבע"
+    "reCaptchaMsg": "אתה רובוט?! 🤔"
 }

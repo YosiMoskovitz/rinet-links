@@ -5,7 +5,7 @@ import { Loading } from '../../Pages/Loading';
 
 import { DataGrid } from '@mui/x-data-grid';
 
-import { getFormattedDate } from '../../Components/Utils';
+import { getFormattedDate, getFormattedTime } from '../../Components/Utils';
 
 function BasicTable() {
   const [loading, setLoading] = useState(true);
@@ -22,9 +22,11 @@ function BasicTable() {
   }, []);
 
   const columns = [
-    { field: 'time', headerName: 'תאריך', width: 130, valueGetter: (params) => getFormattedDate(params.row.time), },
+    { field: 'date', headerName: 'תאריך', width: 130, valueGetter: (params) => getFormattedDate(params.row.time), },
+    { field: 'time', headerName: 'שעה', width: 130, valueGetter: (params) => getFormattedTime(params.row.time), },
     { field: 'user', headerName: 'משתמש', width: 250, valueGetter: (params) => getUserName(params.row.user) },
-    { field: 'Amount', headerName: 'סך', width: 130 },
+    { field: 'Tashloumim', headerName: 'תשלומים', width: 100},
+    { field: 'Amount', headerName: 'סך', width: 100 },
     { field: 'Currency', headerName: 'מטבע', width: 90, valueGetter: (params) => params.row.Currency === '1' ? 'ש"ח' : '$' },
     { field: 'LastNum', headerName: '4 ספרות א.', width: 90 },
     { field: 'Confirmation', headerName: 'אישור', width: 90 },
@@ -69,12 +71,12 @@ function BasicTable() {
   //   );
   return loading ? <Loading />
     : (
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
         />
       </div>
     );

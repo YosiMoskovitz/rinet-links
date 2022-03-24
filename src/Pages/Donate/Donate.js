@@ -2,7 +2,7 @@ import { React, useContext, useState, useRef } from 'react'
 import { Card } from 'react-bootstrap';
 import styles from './Donate.module.css';
 import { Formik } from 'formik'
-import { InputTextField, InputSelectField } from '../../Components/FormikForm';
+import { InputTextField } from '../../Components/FormikForm';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap'
 import * as Yup from 'yup';
 import LoginContext from '../../store/Login-context'
@@ -36,17 +36,13 @@ export const Donate = () => {
     );
 
 
-    const paymentTypes = [{ id: 'Ragil', title: 'normal' }, { id: 'HK', title: "HK" }]
-
     const initialValues = {
-        paymentType: '',
         amount: '',
         tashlumim: '1',
         comment: ''
     }
 
     const schema = Yup.object({
-        paymentType: Yup.string().required(translate.requiredMsg),
         amount: Yup.number().required(translate.requiredMsg),
         tashlumim: Yup.number().required(translate.requiredMsg),
         comment: Yup.string().max(300)
@@ -96,12 +92,6 @@ export const Donate = () => {
                     type='text'
                     disabled={isSubmitting}
                 />
-                <InputSelectField
-                    label={`סוג תשלום:`}
-                    name="paymentType"
-                    array={paymentTypes}
-                    disabled={isSubmitting}
-                />
                 <InputTextField
                     label={`סכום לחיוב:`}
                     name="amount"
@@ -109,7 +99,7 @@ export const Donate = () => {
                     disabled={isSubmitting}
                 />
                 <InputTextField
-                    label={`תשלומים/מספר פעמים לחיוב:`}
+                    label={`תשלומים:`}
                     name="tashlumim"
                     type='text'
                     disabled={isSubmitting}
@@ -128,12 +118,12 @@ export const Donate = () => {
     };
 
     const handelDonateClick = async (values) => {
-        var re = nedarimComms({
+        var res = nedarimComms({
             'Name': 'FinishTransaction2',
             'Value': {
                 'Mosad': '0',
                 'ApiValid': APIconfig.nedarimApiKey,
-                'PaymentType': values.paymentType,
+                'PaymentType': 'Ragil',
                 'Currency': '1',
 
                 'Zeout': userCTX.user.zeout ?? '',
@@ -150,21 +140,18 @@ export const Donate = () => {
                 'Groupe': 'Rinet-Links',
                 'Comment': values.comment ?? '',
 
-                'Param1': 'פרמטר 1',
+                'Param1': values.amount,
                 'Param2': '',
                 'ForceUpdateMatching': '0', //מיועד לקמפיין אם מעוניינים שהמידע יידחף ליעד, למרות שזה לא נהוג באייפרם
 
-                'CallBack': `${APIconfig.url}/donationes/new-donation/${userCTX.user.id}`,
+                'CallBack': `https://rinet-links.herokuapp.com/donationes/new-donation/${userCTX.user.id}`,
                 // 'Tokef': document.getElementById('Tokef').value //אם אתם מנהלים את התוקף בדף שלכם (מיועד למי שרוצה להפריד בין חודש לשנה ורוצה לעצב מותאם אישית)
-            }
+            }  
         })
         // .then(async (res) => {
         //     return await registerDonation(userCTX.user.id, res);
         // })
-        .then((res) => {
-            return res;
-        });
-        return re;
+        return res;
     }
 
     return (

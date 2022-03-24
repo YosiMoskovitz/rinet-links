@@ -23,7 +23,7 @@ export function Login() {
             }, 1500)
         }
         if (res.status === 'ERROR') {
-            setMsg(res.data)
+            setMsg({data: res.data})
         }
     }
 

@@ -64,7 +64,7 @@ export const Account = () => {
                                 return (
                                     <ListGroup.Item key={donation.id}>
                                         <span className={styles.sp}>{'בתאריך '}</span>
-                                        {donation.TransactionTime}
+                                        {getFormattedDate(donation.time)}
                                         <span className={styles.sp}>{' סך '}</span>
                                         {donation.Amount +' '}
                                         {donation.Currency === '1' ? 'ש"ח' : '$'}
