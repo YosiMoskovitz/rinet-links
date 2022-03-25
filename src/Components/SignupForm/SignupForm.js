@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormikForm, InputTextField, ReCAPTCHAField } from '../FormikForm';
 import { Row, Col, Button, Alert, Spinner } from 'react-bootstrap'
@@ -11,12 +11,9 @@ import translate from '../Utils/engToHeb.json'
 
 export function SignupForm({ formSubmit, message }) {
     const navigate = useNavigate();
-
-    const handleLoginPage = () => {
-        navigate('/login')
-    }
-
-    const initialValues = {
+    //keep track if reCaptcha has ben validated
+    const [isCaptcha, setIsCaptcha] = useState(false);
+    const [initialValues, setInitValues] = useState({
         email: '',
         firstName: '',
         lastName: '',
@@ -28,6 +25,17 @@ export function SignupForm({ formSubmit, message }) {
         password: '',
         passwordVer: '',
         reCaptcha: false
+    });
+
+    //update initValues to not require a reCaptcha if past once
+    useEffect(()=> {
+        setInitValues((prev)=> {
+            return {...prev, reCaptcha: isCaptcha};
+        })
+    }, [isCaptcha])
+
+    const handleLoginPage = () => {
+        navigate('/login')
     }
 
     const schema = Yup.object({
@@ -44,97 +52,104 @@ export function SignupForm({ formSubmit, message }) {
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
             translate.passValidMsg).required(translate.requiredMsg),
         passwordVer: Yup.string().oneOf([Yup.ref('password'), null], translate.passwordsVerMsg).required(translate.requiredMsg),
-        ReCAPTCHA: Yup.boolean().oneOf([true]).required(translate.reCaptchaMsg)
+        reCaptcha: Yup.boolean().oneOf([true], translate.reCaptchaMsg).required(translate.reCaptchaMsg).default(isCaptcha)
     });
 
     const Fields = ({ isSubmitting, setFieldValue, submitRes }) => {
         return (
             <>
-                <Row>
-                    <Col>
+                <InputTextField
+                    label={`כתובת דוא"ל:`}
+                    type='email'
+                    name="email"
+                    disabled={isSubmitting}
+                />
+                <div className="row">
+                    <div className='col'>
                         <InputTextField
                             label={`שם פרטי:`}
                             name="firstName"
                             type='text'
                             disabled={isSubmitting}
                         />
-                    </Col>
-                    <Col>
+                    </div>
+                    <div className='col'>
                         <InputTextField
                             label={`שם משפחה:`}
                             name="lastName"
                             type='text'
                             disabled={isSubmitting}
                         />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
+                    </div>
+
+                </div>
+                <div className="row">
+                    <div className='col'>
                         <InputTextField
                             label={`סיסמה:`}
                             name="password"
                             type='password'
                             disabled={isSubmitting}
                         />
-                    </Col>
-                    <Col>
+                    </div>
+                    <div className='col'>
                         <InputTextField
                             label={`הקלד שוב את הסיסמה:`}
                             name="passwordVer"
                             type='password'
                             disabled={isSubmitting}
                         />
-                    </Col>
-                </Row>
-                <Row><span className="text-primary mb-2 mt-2" >פרטים אופציונליים - לא חובה:</span></Row>
-                <>
-                    <Row>
-                        <InputTextField
-                            label={`תעודת זהות:`}
-                            name="zeout"
-                            type='tel'
-                            disabled={isSubmitting}
-                            size="sm"
-                        />
-                    </Row>
-                    <Row>
-                        <Col>
+                    </div>
+                </div>
+                <div className='bg-light rounded mb-3 p-2'>
+                    <div className='mb-3 d-flex justify-content-center'><span className='text-primary'>מידע אופציונלי - לא חובה</span></div>
+                    <div className='row'>
+                        <div className='col'>
                             <InputTextField
-                                label={`מדינה:`}
-                                name="country"
+                                label={`טלפון:`}
+                                name="phone"
+                                type='tel'
+                                disabled={isSubmitting}
+                            />
+                        </div>
+                        <div className='col'>
+                            <InputTextField
+                                label={`כתובת:`}
+                                name="street"
                                 type='text'
                                 disabled={isSubmitting}
-                                size="sm"
                             />
-                        </Col>
-                        <Col>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col'>
                             <InputTextField
                                 label={`עיר:`}
                                 name="city"
                                 type='text'
                                 disabled={isSubmitting}
-                                size="sm"
                             />
-                        </Col>
-                    </Row>
+                        </div>
+                        <div className='col'>
+                            <InputTextField
+                                label={`מדינה:`}
+                                name="country"
+                                type='text'
+                                disabled={isSubmitting}
+                            />
+                        </div>
+                    </div>
                     <InputTextField
-                        label={`כתובת:`}
-                        name="street"
-                        type='text'
-                        disabled={isSubmitting}
-                        size="sm"
-                    />
-                    <InputTextField
-                        label={`טלפון:`}
-                        name="phone"
+                        label={`תעודת זהות:`}
+                        name="zeout"
                         type='tel'
                         disabled={isSubmitting}
-                        size="sm"
                     />
-                </>
+                </div>
                 <ReCAPTCHAField
-                    name="ReCAPTCHA"
-                    set={setFieldValue}
+                    name="reCaptcha"
+                    setValue={setFieldValue}
+                    setState={setIsCaptcha}
                     show={!initialValues.reCaptcha}
                 />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
@@ -151,7 +166,6 @@ export function SignupForm({ formSubmit, message }) {
         )
     }
 
-    console.log(initialValues.reCaptcha)
 
     return (
         <div className={styles.felids} style={{ marginTop: '10vh' }}>

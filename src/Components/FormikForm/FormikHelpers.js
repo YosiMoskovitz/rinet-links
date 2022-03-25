@@ -55,12 +55,15 @@ export const InputSelectField = ({ label, array, ...props }) => {
     );
 };
 
-export const ReCAPTCHAField = ({set, show, ...props }) => {
+export const ReCAPTCHAField = ({setValue, setState, show, ...props }) => {
     const [field, meta] = useField(props);
 
     const handleReCaptchaChange = async (value) => {
         const res = await VerifyRecaptchaReq(value);
-        if (res.status === 200) set('ReCAPTCHA', true, { shouldValidate: true })
+        if (res.status === 200) {
+            setValue('reCaptcha', true, { shouldValidate: true });
+            setState(true); 
+        }
     }
 
     if(show) {

@@ -27,7 +27,7 @@ export const FormikForm = ({ initialValues, schema, Fields, formSubmit, afterSub
             >
                 {({ isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
                     <Form noValidate onSubmit={handleSubmit} onChange={handleChange}>
-                        <Fields isSubmitting={isSubmitting} setFieldValue={setFieldValue} submitRes={submitRes}/>
+                        <Fields isSubmitting={isSubmitting} setFieldValue={setFieldValue} submitRes={submitRes} />
                     </Form>
                 )}
             </Formik>
