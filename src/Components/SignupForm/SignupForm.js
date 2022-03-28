@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormikForm, InputTextField, ReCAPTCHAField } from '../FormikForm';
 import { Row, Col, Button, Alert, Spinner } from 'react-bootstrap'
@@ -13,7 +13,8 @@ export function SignupForm({ formSubmit, message }) {
     const navigate = useNavigate();
     //keep track if reCaptcha has ben validated
     const [isCaptcha, setIsCaptcha] = useState(false);
-    const [initialValues, setInitValues] = useState({
+
+    const initialValues = {
         email: '',
         firstName: '',
         lastName: '',
@@ -25,14 +26,9 @@ export function SignupForm({ formSubmit, message }) {
         password: '',
         passwordVer: '',
         reCaptcha: false
-    });
+    };
 
-    //update initValues to not require a reCaptcha if past once
-    useEffect(()=> {
-        setInitValues((prev)=> {
-            return {...prev, reCaptcha: isCaptcha};
-        })
-    }, [isCaptcha])
+
 
     const handleLoginPage = () => {
         navigate('/login')
@@ -150,7 +146,7 @@ export function SignupForm({ formSubmit, message }) {
                     name="reCaptcha"
                     setValue={setFieldValue}
                     setState={setIsCaptcha}
-                    show={!initialValues.reCaptcha}
+                    show={!isCaptcha}
                 />
                 <div className={`form-group d-grid gap-2 mx-auto ${styles.saveBtn}`}>
                     <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ?
