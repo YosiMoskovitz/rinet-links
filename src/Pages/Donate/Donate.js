@@ -35,7 +35,6 @@ export const Donate = () => {
         />
     );
 
-
     const initialValues = {
         amount: '',
         tashlumim: '1',
